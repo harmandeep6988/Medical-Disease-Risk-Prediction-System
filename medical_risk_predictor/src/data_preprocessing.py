@@ -5,16 +5,18 @@ from typing import Iterable
 
 import numpy as np
 import pandas as pd
-from imblearn.over_sampling import SMOTE
+from imblearn.over_sampling import SMOTE, SMOTENC
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
 @dataclass
 class PreprocessingArtifacts:
-    standard_scaler: StandardScaler
-    minmax_scaler: MinMaxScaler
+    standard_scaler: StandardScaler | None
+    minmax_scaler: MinMaxScaler | None
     feature_columns: list[str]
+    scaled_columns: list[str]
+    passthrough_columns: list[str]
 
 
 def load_dataset(path: str) -> pd.DataFrame:
@@ -62,24 +64,40 @@ def iqr_outlier_clip(df: pd.DataFrame, exclude_columns: Iterable[str] | None = N
     return out
 
 
-def scale_features(X_train: pd.DataFrame, X_test: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, PreprocessingArtifacts]:
+def scale_features(
+    X_train: pd.DataFrame,
+    X_test: pd.DataFrame,
+    passthrough_columns: Iterable[str] | None = None,
+) -> tuple[pd.DataFrame, pd.DataFrame, PreprocessingArtifacts]:
     """Apply StandardScaler then MinMaxScaler and return scaled dataframes."""
-    std_scaler = StandardScaler()
-    mm_scaler = MinMaxScaler()
+    passthrough = [c for c in (passthrough_columns or []) if c in X_train.columns]
+    scaled_cols = [c for c in X_train.columns if c not in passthrough]
 
-    X_train_std = std_scaler.fit_transform(X_train)
-    X_test_std = std_scaler.transform(X_test)
+    train_df = X_train.copy()
+    test_df = X_test.copy()
 
-    X_train_scaled = mm_scaler.fit_transform(X_train_std)
-    X_test_scaled = mm_scaler.transform(X_test_std)
+    std_scaler: StandardScaler | None = None
+    mm_scaler: MinMaxScaler | None = None
 
-    train_df = pd.DataFrame(X_train_scaled, columns=X_train.columns, index=X_train.index)
-    test_df = pd.DataFrame(X_test_scaled, columns=X_test.columns, index=X_test.index)
+    if scaled_cols:
+        std_scaler = StandardScaler()
+        mm_scaler = MinMaxScaler()
+
+        X_train_std = std_scaler.fit_transform(X_train[scaled_cols])
+        X_test_std = std_scaler.transform(X_test[scaled_cols])
+
+        X_train_scaled = mm_scaler.fit_transform(X_train_std)
+        X_test_scaled = mm_scaler.transform(X_test_std)
+
+        train_df.loc[:, scaled_cols] = X_train_scaled
+        test_df.loc[:, scaled_cols] = X_test_scaled
 
     artifacts = PreprocessingArtifacts(
         standard_scaler=std_scaler,
         minmax_scaler=mm_scaler,
         feature_columns=list(X_train.columns),
+        scaled_columns=scaled_cols,
+        passthrough_columns=passthrough,
     )
     return train_df, test_df, artifacts
 
@@ -89,6 +107,7 @@ def split_and_balance(
     target_column: str,
     test_size: float = 0.2,
     random_state: int = 42,
+    categorical_columns: Iterable[str] | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     """Create stratified train/test split and apply SMOTE to training data."""
     X = df.drop(columns=[target_column])
@@ -102,10 +121,20 @@ def split_and_balance(
         random_state=random_state,
     )
 
-    smote = SMOTE(random_state=random_state)
+    categorical_columns = [c for c in (categorical_columns or []) if c in X.columns]
+    categorical_idx = [X.columns.get_loc(c) for c in categorical_columns]
+
+    if categorical_idx:
+        smote = SMOTENC(categorical_features=categorical_idx, random_state=random_state)
+    else:
+        smote = SMOTE(random_state=random_state)
+
     X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 
     X_train_resampled = pd.DataFrame(X_train_resampled, columns=X.columns)
+    for col in categorical_columns:
+        X_train_resampled[col] = pd.to_numeric(X_train_resampled[col], errors="coerce").round().astype(int)
+
     y_train_resampled = pd.Series(y_train_resampled, name=target_column)
 
     return X_train_resampled, X_test, y_train_resampled, y_test
@@ -116,6 +145,7 @@ def preprocess_data(
     target_column: str,
     medical_zero_invalid_cols: Iterable[str],
     missing_strategy: str = "median",
+    categorical_passthrough_cols: Iterable[str] | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, PreprocessingArtifacts]:
     """End-to-end preprocessing pipeline returning train/test sets and fitted scalers."""
     df = load_dataset(path)
@@ -123,7 +153,17 @@ def preprocess_data(
     df = handle_missing_values(df, strategy=missing_strategy)
     df = iqr_outlier_clip(df, exclude_columns=[target_column])
 
-    X_train, X_test, y_train, y_test = split_and_balance(df, target_column=target_column)
-    X_train_scaled, X_test_scaled, artifacts = scale_features(X_train, X_test)
+    categorical_passthrough_cols = [c for c in (categorical_passthrough_cols or []) if c in df.columns]
+    X_train, X_test, y_train, y_test = split_and_balance(
+        df,
+        target_column=target_column,
+        categorical_columns=categorical_passthrough_cols,
+    )
+
+    X_train_scaled, X_test_scaled, artifacts = scale_features(
+        X_train,
+        X_test,
+        passthrough_columns=categorical_passthrough_cols,
+    )
 
     return X_train_scaled, X_test_scaled, y_train, y_test, artifacts

@@ -5,6 +5,9 @@ import pandas as pd
 from sklearn.feature_selection import SelectKBest, f_classif
 
 
+HEART_CATEGORICAL_COLUMNS = ["sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"]
+
+
 def _create_bmi_category(df: pd.DataFrame) -> pd.DataFrame:
     out = df.copy()
     if "BMI" not in out.columns:
@@ -44,14 +47,20 @@ def _create_interaction_features(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def build_feature_matrix(df: pd.DataFrame) -> pd.DataFrame:
+def build_feature_matrix(df: pd.DataFrame, categorical_columns: list[str] | None = None) -> pd.DataFrame:
     """Apply deterministic feature construction and one-hot encoding."""
     enriched = _create_bmi_category(df)
     enriched = _create_age_group(enriched)
     enriched = _create_interaction_features(enriched)
+
+    categorical_columns = [c for c in (categorical_columns or []) if c in enriched.columns]
+    for col in categorical_columns:
+        # Force categorical treatment to avoid ordinal assumptions on coded values.
+        enriched[col] = pd.to_numeric(enriched[col], errors="coerce").round().astype("Int64").astype(str)
+
     encoded = pd.get_dummies(
         enriched,
-        columns=[c for c in ["BMI_Category", "Age_Group"] if c in enriched.columns],
+        columns=[c for c in ["BMI_Category", "Age_Group"] if c in enriched.columns] + categorical_columns,
         drop_first=True,
     )
     return encoded
@@ -98,9 +107,10 @@ def engineer_features(
     y: pd.Series,
     corr_threshold: float = 0.9,
     k_best: int = 10,
+    categorical_columns: list[str] | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, SelectKBest, list[str], list[str]]:
     """Build derived features, remove strong multicollinearity, and select best predictors."""
-    encoded = build_feature_matrix(X)
+    encoded = build_feature_matrix(X, categorical_columns=categorical_columns)
 
     reduced, corr_matrix = drop_highly_correlated_features(encoded, threshold=corr_threshold)
     dropped_columns = [c for c in encoded.columns if c not in reduced.columns]
@@ -115,9 +125,10 @@ def transform_features_for_inference(
     dropped_columns: list[str],
     reduced_columns: list[str],
     selector: SelectKBest,
+    categorical_columns: list[str] | None = None,
 ) -> pd.DataFrame:
     """Apply train-time feature construction and selection on new data."""
-    encoded = build_feature_matrix(X)
+    encoded = build_feature_matrix(X, categorical_columns=categorical_columns)
     reduced = encoded.drop(columns=dropped_columns, errors="ignore")
     selector_input_columns = list(getattr(selector, "feature_names_in_", reduced_columns))
     reduced = reduced.reindex(columns=selector_input_columns, fill_value=0)

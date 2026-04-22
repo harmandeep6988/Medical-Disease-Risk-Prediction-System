@@ -13,7 +13,7 @@ if str(SRC) not in sys.path:
 
 from data_preprocessing import preprocess_data
 from explainability import explain_model_predictions
-from feature_engineering import engineer_features, transform_features_for_inference
+from feature_engineering import HEART_CATEGORICAL_COLUMNS, engineer_features, transform_features_for_inference
 from model_evaluation import evaluate_and_visualize
 from model_training import train_models
 
@@ -21,24 +21,35 @@ from model_training import train_models
 def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> None:
     print(f"Running pipeline for: {dataset_path.name}")
 
+    source_columns = list(pd.read_csv(dataset_path, nrows=2).columns)
+    categorical_cols = [c for c in HEART_CATEGORICAL_COLUMNS if c in source_columns]
+
     invalid_zero_cols = [
         c
         for c in ["Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "chol", "trestbps", "thalach"]
-        if c in pd.read_csv(dataset_path, nrows=2).columns
+        if c in source_columns
     ]
 
     X_train, X_test, y_train, y_test, _ = preprocess_data(
         path=str(dataset_path),
         target_column=target_column,
         medical_zero_invalid_cols=invalid_zero_cols,
+        categorical_passthrough_cols=categorical_cols,
     )
 
     X_train_eng, importance, _, selector, dropped_columns, reduced_columns = engineer_features(
         X_train,
         y_train,
         k_best=min(10, X_train.shape[1]),
+        categorical_columns=categorical_cols,
     )
-    X_test_eng = transform_features_for_inference(X_test, dropped_columns, reduced_columns, selector)
+    X_test_eng = transform_features_for_inference(
+        X_test,
+        dropped_columns,
+        reduced_columns,
+        selector,
+        categorical_columns=categorical_cols,
+    )
 
     models, cv_summary = train_models(X_train_eng, y_train)
     eval_summary, best_model_name, artifacts = evaluate_and_visualize(models, X_test_eng, y_test)
@@ -54,7 +65,16 @@ def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> N
     out_dir = ROOT / "models" / "saved_models"
     out_dir.mkdir(parents=True, exist_ok=True)
     joblib.dump(best_model, out_dir / f"best_{model_prefix}.joblib")
-    joblib.dump({"features": X_train_eng.columns.tolist(), "target": target_column}, out_dir / f"best_{model_prefix}_meta.joblib")
+    joblib.dump(
+        {
+            "features": X_train_eng.columns.tolist(),
+            "target": target_column,
+            "raw_columns": [c for c in source_columns if c != target_column],
+            "categorical_columns": categorical_cols,
+            "invalid_zero_columns": invalid_zero_cols,
+        },
+        out_dir / f"best_{model_prefix}_meta.joblib",
+    )
 
     print("CV Summary:")
     print(cv_summary)
