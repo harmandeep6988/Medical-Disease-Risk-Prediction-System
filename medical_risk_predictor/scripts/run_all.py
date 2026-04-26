@@ -21,12 +21,16 @@ def run_step(command: list[str], name: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run full medical risk predictor workflow.")
     parser.add_argument("--skip-prepare", action="store_true", help="Skip dataset preparation step.")
+    parser.add_argument("--include-kaggle", action="store_true", help="Augment data preparation with compatible Kaggle datasets.")
     parser.add_argument("--no-dashboard", action="store_true", help="Skip launching Streamlit dashboard.")
     parser.add_argument("--port", type=int, default=8501, help="Dashboard port when launching Streamlit.")
     args = parser.parse_args()
 
     if not args.skip_prepare:
-        run_step([PYTHON, "scripts/prepare_datasets.py"], "Prepare datasets")
+        prepare_cmd = [PYTHON, "scripts/prepare_datasets.py"]
+        if args.include_kaggle:
+            prepare_cmd.append("--include-kaggle")
+        run_step(prepare_cmd, "Prepare datasets")
 
     run_step([PYTHON, "scripts/train_and_evaluate.py"], "Train and evaluate models")
 

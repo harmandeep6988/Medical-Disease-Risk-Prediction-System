@@ -1,0 +1,61 @@
+# Version control
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+.pytest_cache
+.coverage
+htmlcov
+
+# Virtual environments
+venv
+env
+ENV
+.venv
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Documentation
+docs
+*.md
+!requirements.txt
+
+# Dependencies (will be installed in container)
+node_modules
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Data artifacts (will be mounted as volumes)
+*.csv
+*.pkl
+*.joblib
+
+# Logs
+*.log
+
+# Temporary files
+tmp
+temp
+*.tmp

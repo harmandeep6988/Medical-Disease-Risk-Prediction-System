@@ -14,3 +14,4 @@ imbalanced-learn==0.12.3
 scipy==1.13.1
 jupyter==1.1.1
 notebook==7.2.2
+kaggle==1.6.17
