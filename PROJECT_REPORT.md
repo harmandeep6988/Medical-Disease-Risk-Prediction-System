@@ -5,6 +5,8 @@
 **Status:** Production-Ready with Kaggle Augmentation  
 **Environment:** Python 3.12.3 | venv at `/home/blaze/important/project.ml/.venv`
 
+**Last Pipeline Re-Run:** 2026-04-28
+
 ---
 
 ## 1. Executive Summary
@@ -21,9 +23,27 @@ The **Medical Disease Risk Prediction System** is an end-to-end machine learning
 ### Key Business Outcomes
 - **Heart Disease AUC: 0.911** (excellent discrimination) on 1,517 records
 - **Diabetes AUC: 0.826** on 768 records
-- **Cross-validation robustness:** CV std < 0.03 (highly stable model generalization)
+- **Cross-validation robustness (AUC-based CV):** Heart CV std ≈ 0.021; Diabetes CV std ≈ 0.042
 - **411% data increase** for heart disease via Kaggle integration
 - **Categorical encoding safety:** One-hot encoding prevents ordinal learning artifacts
+
+### Latest Pipeline Results (2026-04-28)
+
+**Anomaly Detection (IsolationForest, contamination=0.05):**
+- Diabetes: **39 anomalies / 768 rows**
+   - Top unusual drivers: Insulin, Age_BMI_Interaction, SkinThickness, BloodPressure, BP_BMI_Interaction
+- Heart: **76 anomalies / 1,517 rows**
+   - Top unusual drivers: ca_2, ca_1, ca_3, slope_3, thal_6, thal_7
+
+Artifacts written to:
+- `medical_risk_predictor/reports/generated/diabetes_anomaly_scatter.png`
+- `medical_risk_predictor/reports/generated/diabetes_anomaly_anomalies.csv`
+- `medical_risk_predictor/reports/generated/heart_anomaly_scatter.png`
+- `medical_risk_predictor/reports/generated/heart_anomaly_anomalies.csv`
+
+**Best Model Performance (test set):**
+- Diabetes (GradientBoosting): AUC **0.825741**, Accuracy **0.759740**
+- Heart (GradientBoosting): AUC **0.911211**, Accuracy **0.835526**
 
 ---
 
@@ -148,7 +168,7 @@ Development:
 
 ```bash
 # One-command orchestration:
-python scripts/run_all.py --include-kaggle [--no-dashboard]
+python medical_risk_predictor/scripts/run_all.py --include-kaggle [--no-dashboard]
 ```
 
 **Execution Sequence:**
@@ -634,12 +654,20 @@ Clinician Can:
 │   │
 │   ├── reports/
 │   │   └── generated/
+│   │       ├── diabetes_anomaly_scatter.png
+│   │       ├── diabetes_anomaly_anomalies.csv
+│   │       ├── heart_anomaly_scatter.png
+│   │       ├── heart_anomaly_anomalies.csv
 │   │       ├── roc_curves.png
 │   │       ├── best_model_confusion_matrix.png
 │   │       ├── model_comparison.png
 │   │       ├── shap_summary_beeswarm.png
 │   │       ├── shap_global_bar.png
 │   │       ├── shap_waterfall_patient.png
+│   │       ├── diabetes_cv_summary.csv
+│   │       ├── diabetes_evaluation_summary.csv
+│   │       ├── heart_cv_summary.csv
+│   │       ├── heart_evaluation_summary.csv
 │   │       └── patient_report_*.pdf
 │   │
 │   ├── dashboard/

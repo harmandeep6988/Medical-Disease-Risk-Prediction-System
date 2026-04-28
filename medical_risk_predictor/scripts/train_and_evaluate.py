@@ -54,6 +54,11 @@ def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> N
     models, cv_summary = train_models(X_train_eng, y_train)
     eval_summary, best_model_name, artifacts = evaluate_and_visualize(models, X_test_eng, y_test)
 
+    reports_dir = ROOT / "reports" / "generated"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    cv_summary.to_csv(reports_dir / f"{model_prefix}_cv_summary.csv", index=False)
+    eval_summary.to_csv(reports_dir / f"{model_prefix}_evaluation_summary.csv", index=False)
+
     best_model = models[best_model_name]
     explanation, shap_files, explainer, _ = explain_model_predictions(
         best_model,

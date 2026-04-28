@@ -28,6 +28,8 @@ def main() -> None:
     if not args.skip_prepare:
         run_step([PYTHON, "scripts/prepare_datasets.py"], "Prepare datasets")
 
+    run_step([PYTHON, "scripts/run_anomaly_detection.py"], "Run anomaly detection")
+
     run_step([PYTHON, "scripts/train_and_evaluate.py"], "Train and evaluate models")
 
     if not args.no_dashboard:

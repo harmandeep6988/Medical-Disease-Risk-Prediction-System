@@ -17,8 +17,18 @@ def detect_anomalies(
     contamination: float = 0.05,
     random_state: int = 42,
     verbose: bool = True,
+    artifact_prefix: str = "anomaly",
+    output_dir: Path | None = None,
+    save_csv: bool = False,
 ) -> tuple[list[int], pd.Series, pd.DataFrame, Path]:
-    """Detect anomalous patient profiles and provide per-record reasons."""
+    """Detect anomalous patient profiles and provide per-record reasons.
+
+    Returns:
+        anomaly_indices: list of index values flagged as anomalies.
+        scores: IsolationForest decision_function scores (higher is more normal).
+        reasons: per-row most unusual feature (by |z|) and its z-score.
+        plot_path: path to the saved PCA scatter plot.
+    """
     model = IsolationForest(contamination=contamination, random_state=random_state)
     preds = model.fit_predict(df)
     scores = pd.Series(model.decision_function(df), index=df.index, name="anomaly_score")
@@ -39,9 +49,25 @@ def detect_anomalies(
     plt.ylabel("PC2")
     plt.tight_layout()
 
-    plot_path = ANOMALY_DIR / "anomaly_scatter.png"
+    out_dir = output_dir or ANOMALY_DIR
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    plot_path = out_dir / f"{artifact_prefix}_scatter.png"
     plt.savefig(plot_path, dpi=200)
     plt.close()
+
+    if save_csv:
+        out = pd.DataFrame(
+            {
+                "index": df.index,
+                "is_anomaly": anomaly_mask.astype(int),
+                "anomaly_score": scores.values,
+                "most_unusual_feature": reasons["most_unusual_feature"].values,
+                "feature_zscore": reasons["feature_zscore"].values,
+            }
+        )
+        out_path = out_dir / f"{artifact_prefix}_anomalies.csv"
+        out.to_csv(out_path, index=False)
 
     if verbose:
         for idx in anomaly_indices:

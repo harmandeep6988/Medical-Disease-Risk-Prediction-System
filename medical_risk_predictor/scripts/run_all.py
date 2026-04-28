@@ -32,6 +32,8 @@ def main() -> None:
             prepare_cmd.append("--include-kaggle")
         run_step(prepare_cmd, "Prepare datasets")
 
+    run_step([PYTHON, "scripts/run_anomaly_detection.py"], "Run anomaly detection")
+
     run_step([PYTHON, "scripts/train_and_evaluate.py"], "Train and evaluate models")
 
     if not args.no_dashboard:
