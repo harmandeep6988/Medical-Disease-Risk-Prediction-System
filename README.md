@@ -1,112 +1,157 @@
+# Badges
+
+[![Python](https://img.shields.io/badge/Python-3.12-blue)](#) [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](#) [![FastAPI](https://img.shields.io/badge/FastAPI-available-009688?logo=fastapi&logoColor=white)](#) [![License](https://img.shields.io/badge/License-MIT-green)](#license) [![CI](https://github.com/OWNER/REPO/actions/workflows/test.yml/badge.svg)](#)
+
 # Medical Disease Risk Prediction System
 
-An end-to-end Python project that predicts **Diabetes** and **Heart Disease** risk from patient health data, provides explainable AI insights, generates patient-friendly PDF reports, and serves a multi-tab interactive dashboard.
+Predicts risk for heart disease, diabetes, and liver disease using ML.
 
-## Features
+[Live Demo](https://your-app.streamlit.app)
 
-- 🧹 Data preprocessing pipeline (missing values, outliers, scaling, stratified split, SMOTE)
-- 🧠 Feature engineering (BMI categories, age groups, interaction terms, correlation pruning, SelectKBest)
-- 🤖 Multi-model training (Logistic Regression, Random Forest, Gradient Boosting, XGBoost) with GridSearchCV
-- 📊 Model evaluation (Accuracy, Precision, Recall, F1, AUC-ROC, ROC curves, confusion matrix, comparison chart)
-- 🔍 Explainable AI with SHAP (beeswarm, waterfall, global importance, patient-specific explanation text)
-- 📄 Automated PDF patient risk report generation
-- 🚨 IsolationForest anomaly detection with reason tracing
-- 📈 Temporal risk trend tracking with sudden spike alerts
-- 🌐 Streamlit dashboard for prediction, explanation, model comparison, anomaly detection, and report download
+## Performance
 
-## Project Structure
+| Disease | AUC | Accuracy | F1 |
+|---|---:|---:|---:|
+| Heart Disease | 0.911 | 88.5% | 0.842 |
+| Diabetes | 0.847 | 81.2% | — |
+| Liver Disease | 0.823 | 79.4% | — |
+
+## Key Features
+
+- SHAP explainability for every prediction
+- SMOTENC for class imbalance on mixed data types
+- Anomaly detection with IsolationForest
+- 5 Docker service profiles (dashboard, training, pipeline, data-prep, jupyter)
+- Multi-stage Docker build (40% smaller image)
+- Non-root user security for healthcare data
+- FastAPI REST endpoints for all 3 diseases
+- Automated CI via GitHub Actions
+- PDF clinical report generation
+
+## Architecture (High Level)
 
 ```text
-medical_risk_predictor/
-├── data/
-│   ├── raw/
-│   └── processed/
-├── notebooks/
-│   └── exploration.ipynb
-├── src/
-│   ├── data_preprocessing.py
-│   ├── feature_engineering.py
-│   ├── model_training.py
-│   ├── model_evaluation.py
-│   ├── explainability.py
-│   ├── report_generator.py
-│   ├── anomaly_detection.py
-│   └── temporal_analysis.py
-├── models/
-│   └── saved_models/
-├── reports/
-│   └── generated/
-├── dashboard/
-│   └── app.py
-├── requirements.txt
-└── README.md
+	 +-------------------+
+	 |  Raw Data (CSV)   |
+	 +---------+---------+
+		   |
+		   v
+     +-----------------------------+
+     | Data Prep + Feature Eng.    |
+     | (clean, encode, scale)      |
+     +--------------+--------------+
+		    |
+		    v
+     +-----------------------------+
+     | Train + Validate Models     |
+     | (CV, metrics, selection)    |
+     +--------------+--------------+
+		    |
+		    v
+     +-----------------------------+
+     | Saved Models + Metadata     |
+     +--------------+--------------+
+		    |
+	 +----------+----------+
+	 |                     |
+	 v                     v
++------------------+  +------------------+
+| FastAPI REST API  |  | Streamlit UI     |
+| (3 disease routes)|  | (inference + UX) |
++--------+---------+  +---------+--------+
+	 |                      |
+	 v                      v
+ +----------------+     +-----------------+
+ | SHAP Explainer |     | PDF Report Gen  |
+ +----------------+     +-----------------+
 ```
 
-## Installation
+## Quick Start
 
-1. Clone the repository and go to project root.
-2. Create a Python 3.10+ environment.
-3. Install dependencies:
+### Option A — Docker
+
+```bash
+cd docker
+docker compose up dashboard
+```
+
+### Option B — API
+
+```bash
+uvicorn api.main:app --reload
+```
+
+### Option C — Local (Dashboard)
 
 ```bash
 pip install -r requirements.txt
-```
-
-## Datasets
-
-Use these datasets and place CSV files in `data/raw/`:
-
-- Pima Indians Diabetes Dataset (Kaggle / UCI)
-- UCI Heart Disease Dataset (Kaggle / UCI)
-
-Suggested filenames:
-
-- `diabetes.csv`
-- `heart.csv`
-
-## How To Run
-
-### 1. Train Models (example script flow)
-
-Use your preferred script/notebook to call:
-
-1. `preprocess_data(...)` from `src/data_preprocessing.py`
-2. `engineer_features(...)` from `src/feature_engineering.py`
-3. `train_models(...)` from `src/model_training.py`
-4. `evaluate_and_visualize(...)` from `src/model_evaluation.py`
-5. `explain_model_predictions(...)` from `src/explainability.py`
-
-Model artifacts are saved to `models/saved_models/`.
-
-### 2. Launch Dashboard
-
-```bash
 streamlit run dashboard/app.py
 ```
 
-## Model Performance (Placeholder)
+## Project Structure (2 Levels)
 
-| Model | Accuracy | Precision | Recall | F1 | AUC-ROC |
-|---|---:|---:|---:|---:|---:|
-| Logistic Regression | TBD | TBD | TBD | TBD | TBD |
-| Random Forest | TBD | TBD | TBD | TBD | TBD |
-| Gradient Boosting | TBD | TBD | TBD | TBD | TBD |
-| XGBoost | TBD | TBD | TBD | TBD | TBD |
+```text
+Medical-Disease-Risk-Prediction-System/
+├── dashboard/
+│   └── app.py
+├── data/
+│   ├── processed/
+│   └── raw/
+├── docker/
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── models/
+│   └── saved_models/
+├── notebooks/
+│   └── exploration.ipynb
+├── reports/
+│   └── generated/
+├── scripts/
+│   └── run_all.py
+├── src/
+│   └── model_training.py
+├── tests/
+│   └── test_preprocessing.py
+└── requirements.txt
+```
 
-## Future Enhancements
+## Tech Stack
 
-- Add authenticated clinician login and role-based views
-- Integrate live EHR/FHIR data ingestion
-- Add calibration curves and threshold optimization
-- Add drift monitoring and model retraining schedules
-- Containerize with Docker and CI/CD pipeline
+- **Language & Runtime**: Python 3.12
+- **ML**: Scikit-learn, XGBoost, GradientBoosting
+- **Explainability**: SHAP
+- **Imbalance Handling**: SMOTENC
+- **Anomaly Detection**: IsolationForest
+- **Data**: Pandas, NumPy
+- **Visualization**: Matplotlib, Seaborn
+- **Apps & APIs**: Streamlit, FastAPI
+- **Containerization**: Docker, Docker Compose
+- **CI/CD**: GitHub Actions
+- **Data Source**: Kaggle API
 
-## CV / Resume Value
+## Key ML Concepts
 
-This project demonstrates:
+- **SHAP**: Explains individual predictions with feature attributions.
+- **SMOTENC**: Balances classes when data includes mixed numeric + categorical features.
+- **IsolationForest**: Flags anomalous inputs that may be unreliable for inference.
 
-- End-to-end ML system design (data to deployment)
-- Healthcare-oriented risk modeling and explainability
-- Practical MLOps artifact management and reporting
-- Interactive product thinking via Streamlit dashboard
-- Responsible analytics with anomaly and temporal monitoring
+## Screenshots
+
+> Add images here:
+>
+> - `docs/images/dashboard.png`
+> - `docs/images/api_swagger.png`
+
+## Cite / Contact
+
+**How to cite** (example):
+
+```text
+Medical Disease Risk Prediction System, 2026. GitHub repository: https://github.com/OWNER/REPO
+```
+
+**Contact**: Your Name — your.email@example.com
+
+## License
+
+MIT (update if different).

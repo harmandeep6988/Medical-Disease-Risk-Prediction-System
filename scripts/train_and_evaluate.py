@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from typing import Mapping
 
 import joblib
 import pandas as pd
@@ -16,6 +17,22 @@ from explainability import explain_model_predictions
 from feature_engineering import HEART_CATEGORICAL_COLUMNS, engineer_features, transform_features_for_inference
 from model_evaluation import evaluate_and_visualize
 from model_training import train_models
+
+
+def _rename_artifacts(model_prefix: str, files: Mapping[str, Path]) -> dict[str, Path]:
+    """Rename generated artifact files to include disease prefix to avoid overwrites."""
+    out: dict[str, Path] = {}
+    for key, src in files.items():
+        src = Path(src)
+        dst = src.with_name(f"{src.stem}_{model_prefix}{src.suffix}")
+        if not src.exists():
+            out[key] = dst
+            continue
+        if dst.exists():
+            dst.unlink()
+        src.rename(dst)
+        out[key] = dst
+    return out
 
 
 def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> None:
@@ -53,6 +70,7 @@ def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> N
 
     models, cv_summary = train_models(X_train_eng, y_train)
     eval_summary, best_model_name, artifacts = evaluate_and_visualize(models, X_test_eng, y_test)
+    artifacts = _rename_artifacts(model_prefix, artifacts)
 
     best_model = models[best_model_name]
     explanation, shap_files, explainer, _ = explain_model_predictions(
@@ -60,6 +78,7 @@ def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> N
         X_train_eng.sample(min(200, len(X_train_eng)), random_state=42),
         X_test_eng.head(50),
     )
+    shap_files = _rename_artifacts(model_prefix, shap_files)
 
     # Save disease-specific best model and metadata.
     out_dir = ROOT / "models" / "saved_models"

@@ -1,0 +1,336 @@
+{
+  "env": {
+    "generated_at": "2026-04-28 22:38:55",
+    "os": "Linux 6.17.0-22-generic",
+    "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+    "packages": {
+      "numpy": "1.26.4",
+      "pandas": "2.2.2",
+      "scikit-learn": "1.5.1",
+      "xgboost": "2.1.1",
+      "shap": "0.46.0",
+      "matplotlib": "3.9.2",
+      "seaborn": "0.13.2",
+      "imbalanced-learn": "0.12.3",
+      "streamlit": "1.39.0",
+      "fpdf2": "2.8.1"
+    },
+    "param_grids": {
+      "LogisticRegression": {
+        "C": [
+          0.1,
+          1.0,
+          5.0
+        ],
+        "solver": [
+          "lbfgs"
+        ]
+      },
+      "RandomForest": {
+        "n_estimators": [
+          100,
+          200
+        ],
+        "max_depth": [
+          null,
+          5,
+          10
+        ],
+        "min_samples_split": [
+          2,
+          5
+        ]
+      },
+      "GradientBoosting": {
+        "n_estimators": [
+          100,
+          200
+        ],
+        "learning_rate": [
+          0.05,
+          0.1
+        ],
+        "max_depth": [
+          2,
+          3
+        ]
+      },
+      "XGBoost": {
+        "n_estimators": [
+          100,
+          200
+        ],
+        "max_depth": [
+          3,
+          5
+        ],
+        "learning_rate": [
+          0.05,
+          0.1
+        ],
+        "subsample": [
+          0.8,
+          1.0
+        ]
+      }
+    }
+  },
+  "results": [
+    {
+      "disease": "Diabetes",
+      "key": "diabetes",
+      "dataset": {
+        "path": "data/processed/diabetes_processed.csv",
+        "shape": [
+          768,
+          9
+        ],
+        "target": "Outcome",
+        "class_balance_test": {
+          "counts": {
+            "0": 100,
+            "1": 54
+          },
+          "positive_rate": 0.35064935064935066,
+          "n": 154
+        },
+        "class_balance_train_after_smote": {
+          "counts": {
+            "0": 400,
+            "1": 400
+          },
+          "positive_rate": 0.5,
+          "n": 800
+        }
+      },
+      "preprocessing": {
+        "test_size": 0.2,
+        "random_state": 42,
+        "missing_strategy": "median",
+        "zero_invalid_columns": [
+          "Glucose",
+          "BloodPressure",
+          "SkinThickness",
+          "Insulin",
+          "BMI"
+        ],
+        "outlier_clip": "IQR 1.5x",
+        "scaling": "StandardScaler -> MinMaxScaler (categoricals passthrough)",
+        "categorical_passthrough_columns": [],
+        "balanced_with": "SMOTE",
+        "scaled_columns": [
+          "Pregnancies",
+          "Glucose",
+          "BloodPressure",
+          "SkinThickness",
+          "Insulin",
+          "BMI",
+          "DiabetesPedigreeFunction",
+          "Age"
+        ]
+      },
+      "model": {
+        "artifact": "models/saved_models/best_diabetes.joblib",
+        "meta": "models/saved_models/best_diabetes_meta.joblib",
+        "type": "GradientBoostingClassifier",
+        "n_features": 8,
+        "params": {
+          "learning_rate": 0.1,
+          "max_depth": 3,
+          "min_samples_leaf": 1,
+          "min_samples_split": 2,
+          "n_estimators": 100,
+          "random_state": 42,
+          "subsample": 1.0
+        }
+      },
+      "metrics": {
+        "accuracy": 0.7597402597402597,
+        "precision": 0.6307692307692307,
+        "recall": 0.7592592592592593,
+        "f1": 0.6890756302521008,
+        "auc": 0.8257407407407408
+      },
+      "confusion_matrix": [
+        [
+          76,
+          24
+        ],
+        [
+          13,
+          41
+        ]
+      ],
+      "explainability": {
+        "explanation_text": "Top risk factors for this patient: Glucose (up risk by 242.4%), BMI (down risk by 91.0%), Glucose_Insulin_Ratio (up risk by 20.2%). Snapshot: Glucose=0.7202797202797202, SkinThickness=0.5178571428571429, Insulin=0.5271739130434783, BMI=0.28705148205928227, Age=0.4175824175824177.",
+        "shap_files": {
+          "beeswarm": "reports/generated/shap_summary_beeswarm_diabetes.png",
+          "waterfall": "reports/generated/shap_waterfall_patient_diabetes.png",
+          "bar": "reports/generated/shap_global_bar_diabetes.png"
+        }
+      },
+      "evaluation_artifacts": {
+        "roc_curves": "reports/generated/roc_curves_diabetes.png",
+        "confusion_matrix": "reports/generated/best_model_confusion_matrix_diabetes.png",
+        "comparison_chart": "reports/generated/model_comparison_diabetes.png"
+      },
+      "anomaly_detection": {
+        "plot": "reports/generated/anomaly_scatter_diabetes.png",
+        "anomaly_rate_train": 0.05,
+        "top_reason_examples": [
+          {
+            "most_unusual_feature": "SkinThickness",
+            "feature_zscore": 2.100334110540249
+          },
+          {
+            "most_unusual_feature": "Glucose_Insulin_Ratio",
+            "feature_zscore": 2.9592066512567294
+          },
+          {
+            "most_unusual_feature": "Glucose_Insulin_Ratio",
+            "feature_zscore": 1.9447278287141352
+          },
+          {
+            "most_unusual_feature": "BP_BMI_Interaction",
+            "feature_zscore": 0.9694315987423983
+          },
+          {
+            "most_unusual_feature": "BMI",
+            "feature_zscore": 1.7868163185814303
+          }
+        ]
+      },
+      "pdf_report": "reports/generated/diabetes_patient_report_20260428_223857.pdf"
+    },
+    {
+      "disease": "Heart Disease",
+      "key": "heart",
+      "dataset": {
+        "path": "data/processed/heart_processed.csv",
+        "shape": [
+          297,
+          14
+        ],
+        "target": "target",
+        "class_balance_test": {
+          "counts": {
+            "0": 32,
+            "1": 28
+          },
+          "positive_rate": 0.4666666666666667,
+          "n": 60
+        },
+        "class_balance_train_after_smote": {
+          "counts": {
+            "1": 128,
+            "0": 128
+          },
+          "positive_rate": 0.5,
+          "n": 256
+        }
+      },
+      "preprocessing": {
+        "test_size": 0.2,
+        "random_state": 42,
+        "missing_strategy": "median",
+        "zero_invalid_columns": [
+          "chol",
+          "trestbps",
+          "thalach"
+        ],
+        "outlier_clip": "IQR 1.5x",
+        "scaling": "StandardScaler -> MinMaxScaler (categoricals passthrough)",
+        "categorical_passthrough_columns": [
+          "sex",
+          "cp",
+          "fbs",
+          "restecg",
+          "exang",
+          "slope",
+          "ca",
+          "thal"
+        ],
+        "balanced_with": "SMOTENC",
+        "scaled_columns": [
+          "age",
+          "trestbps",
+          "chol",
+          "thalach",
+          "oldpeak"
+        ]
+      },
+      "model": {
+        "artifact": "models/saved_models/best_heart.joblib",
+        "meta": "models/saved_models/best_heart_meta.joblib",
+        "type": "XGBClassifier",
+        "n_features": 10,
+        "params": {
+          "colsample_bytree": null,
+          "learning_rate": 0.05,
+          "max_depth": 3,
+          "n_estimators": 100,
+          "random_state": 42,
+          "subsample": 0.8
+        }
+      },
+      "metrics": {
+        "accuracy": 0.8833333333333333,
+        "precision": 0.8888888888888888,
+        "recall": 0.8571428571428571,
+        "f1": 0.8727272727272727,
+        "auc": 0.9375
+      },
+      "confusion_matrix": [
+        [
+          29,
+          3
+        ],
+        [
+          4,
+          24
+        ]
+      ],
+      "explainability": {
+        "explanation_text": "Top risk factors for this patient: cp_4 (down risk by 77.6%), age (down risk by 76.9%), thal_7 (down risk by 67.9%). Snapshot: age=0.16279069767441862, thalach=0.8785046728971964, oldpeak=0.0, sex_1=True, cp_3=False.",
+        "shap_files": {
+          "beeswarm": "reports/generated/shap_summary_beeswarm_heart.png",
+          "waterfall": "reports/generated/shap_waterfall_patient_heart.png",
+          "bar": "reports/generated/shap_global_bar_heart.png"
+        }
+      },
+      "evaluation_artifacts": {
+        "roc_curves": "reports/generated/roc_curves_heart.png",
+        "confusion_matrix": "reports/generated/best_model_confusion_matrix_heart.png",
+        "comparison_chart": "reports/generated/model_comparison_heart.png"
+      },
+      "anomaly_detection": {
+        "plot": "reports/generated/anomaly_scatter_heart.png",
+        "anomaly_rate_train": 0.05078125,
+        "top_reason_examples": [
+          {
+            "most_unusual_feature": "thalach",
+            "feature_zscore": 1.8338504632158648
+          },
+          {
+            "most_unusual_feature": "thal_7",
+            "feature_zscore": 1.1160707795486968
+          },
+          {
+            "most_unusual_feature": "cp_3",
+            "feature_zscore": 1.6627404358944209
+          },
+          {
+            "most_unusual_feature": "cp_3",
+            "feature_zscore": 1.6627404358944209
+          },
+          {
+            "most_unusual_feature": "thalach",
+            "feature_zscore": 1.7434216106214304
+          }
+        ]
+      },
+      "pdf_report": "reports/generated/heart_patient_report_20260428_223859.pdf"
+    }
+  ],
+  "runtime_seconds": 4.197471618652344
+}

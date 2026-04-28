@@ -68,8 +68,13 @@ def generate_patient_report(
     est_savings = _estimate_savings(risk_probability)
 
     pdf = FPDF()
+    pdf.set_left_margin(15)
+    pdf.set_right_margin(15)
+    pdf.set_top_margin(15)
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
+
+    line_w = pdf.w - pdf.l_margin - pdf.r_margin
 
     pdf.set_font("Arial", "B", 16)
     pdf.cell(0, 10, "Medical Disease Risk Report", ln=True)
@@ -82,7 +87,9 @@ def generate_patient_report(
     pdf.cell(0, 8, "Patient Profile", ln=True)
     pdf.set_font("Arial", "", 11)
     for key, val in patient_data.items():
-        pdf.cell(0, 7, f"- {key}: {val}", ln=True)
+        safe_key = str(key).replace("_", " ")
+        pdf.set_x(pdf.l_margin)
+        pdf.multi_cell(line_w, 7, f"- {safe_key}: {val}")
 
     pdf.ln(2)
     pdf.set_font("Arial", "B", 13)
@@ -96,21 +103,25 @@ def generate_patient_report(
     pdf.cell(0, 8, "Top Contributing Risk Factors", ln=True)
     pdf.set_font("Arial", "", 11)
     for feature, contribution in top_features:
+        safe_feature = str(feature).replace("_", " ")
         direction = "increases" if contribution >= 0 else "reduces"
-        pdf.multi_cell(0, 7, f"- {feature}: {direction} risk (SHAP={contribution:.4f})")
+        pdf.set_x(pdf.l_margin)
+        pdf.multi_cell(line_w, 7, f"- {safe_feature}: {direction} risk (SHAP={contribution:.4f})")
 
     pdf.ln(2)
     pdf.set_font("Arial", "B", 13)
     pdf.cell(0, 8, "Recommended Next Steps", ln=True)
     pdf.set_font("Arial", "", 11)
     for step in _next_steps(risk_band):
-        pdf.multi_cell(0, 7, f"- {step}")
+        pdf.set_x(pdf.l_margin)
+        pdf.multi_cell(line_w, 7, f"- {step}")
 
     pdf.ln(2)
     pdf.set_font("Arial", "B", 13)
     pdf.cell(0, 8, "Cost-Benefit Insight", ln=True)
     pdf.set_font("Arial", "", 11)
-    pdf.multi_cell(0, 7, f"Early intervention saves approx ${est_savings:,.0f} in avoidable long-term care costs.")
+    pdf.set_x(pdf.l_margin)
+    pdf.multi_cell(line_w, 7, f"Early intervention saves approx ${est_savings:,.0f} in avoidable long-term care costs.")
 
     out_path = REPORT_DIR / f"{filename_prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
     pdf.output(str(out_path))

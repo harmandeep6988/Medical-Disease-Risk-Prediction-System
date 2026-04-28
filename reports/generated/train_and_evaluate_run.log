@@ -1,0 +1,48 @@
+Running pipeline for: diabetes_processed.csv
+                model  accuracy  precision    recall  f1_score   auc_roc
+0    GradientBoosting  0.759740   0.630769  0.759259  0.689076  0.825741
+1        RandomForest  0.759740   0.639344  0.722222  0.678261  0.824352
+2             XGBoost  0.746753   0.615385  0.740741  0.672269  0.821481
+3  LogisticRegression  0.701299   0.564516  0.648148  0.603448  0.787963
+CV Summary:
+                model  ...    cv_std
+0        RandomForest  ...  0.052280
+1             XGBoost  ...  0.037978
+2    GradientBoosting  ...  0.042261
+3  LogisticRegression  ...  0.021832
+
+[4 rows x 5 columns]
+Evaluation Summary:
+                model  accuracy  precision    recall  f1_score   auc_roc
+0    GradientBoosting  0.759740   0.630769  0.759259  0.689076  0.825741
+1        RandomForest  0.759740   0.639344  0.722222  0.678261  0.824352
+2             XGBoost  0.746753   0.615385  0.740741  0.672269  0.821481
+3  LogisticRegression  0.701299   0.564516  0.648148  0.603448  0.787963
+Best model: GradientBoosting
+Explainability text: Top risk factors for this patient: Glucose (up risk by 242.4%), BMI (down risk by 91.0%), Glucose_Insulin_Ratio (up risk by 20.2%). Snapshot: Glucose=0.7202797202797202, SkinThickness=0.5178571428571429, Insulin=0.5271739130434783, BMI=0.28705148205928227, Age=0.4175824175824177.
+Evaluation artifact files: {'roc_curves': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/roc_curves.png'), 'confusion_matrix': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/best_model_confusion_matrix.png'), 'comparison_chart': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/model_comparison.png')}
+SHAP artifact files: {'beeswarm': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/shap_summary_beeswarm.png'), 'waterfall': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/shap_waterfall_patient.png'), 'bar': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/shap_global_bar.png')}
+Running pipeline for: heart_processed.csv
+                model  accuracy  precision    recall  f1_score   auc_roc
+0             XGBoost  0.883333   0.888889  0.857143  0.872727  0.937500
+1  LogisticRegression  0.866667   0.857143  0.857143  0.857143  0.930804
+2        RandomForest  0.900000   0.892857  0.892857  0.892857  0.927455
+3    GradientBoosting  0.883333   0.888889  0.857143  0.872727  0.921875
+CV Summary:
+                model  ...    cv_std
+0  LogisticRegression  ...  0.051376
+1        RandomForest  ...  0.052485
+2             XGBoost  ...  0.051232
+3    GradientBoosting  ...  0.045403
+
+[4 rows x 5 columns]
+Evaluation Summary:
+                model  accuracy  precision    recall  f1_score   auc_roc
+0             XGBoost  0.883333   0.888889  0.857143  0.872727  0.937500
+1  LogisticRegression  0.866667   0.857143  0.857143  0.857143  0.930804
+2        RandomForest  0.900000   0.892857  0.892857  0.892857  0.927455
+3    GradientBoosting  0.883333   0.888889  0.857143  0.872727  0.921875
+Best model: XGBoost
+Explainability text: Top risk factors for this patient: cp_4 (down risk by 77.6%), age (down risk by 76.9%), thal_7 (down risk by 67.9%). Snapshot: age=0.16279069767441862, thalach=0.8785046728971964, oldpeak=0.0, sex_1=1.0, cp_3=0.0.
+Evaluation artifact files: {'roc_curves': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/roc_curves.png'), 'confusion_matrix': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/best_model_confusion_matrix.png'), 'comparison_chart': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/model_comparison.png')}
+SHAP artifact files: {'beeswarm': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/shap_summary_beeswarm.png'), 'waterfall': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/shap_waterfall_patient.png'), 'bar': PosixPath('/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/shap_global_bar.png')}
