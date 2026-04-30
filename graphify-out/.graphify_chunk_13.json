@@ -1,0 +1,447 @@
+{
+  "nodes": [
+    {
+      "id": "img_shap_beeswarm_diabetes",
+      "label": "SHAP Summary Beeswarm (Diabetes)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_shap_beeswarm_plot",
+      "label": "SHAP Beeswarm Summary Plot",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_shap_value",
+      "label": "SHAP Value (Impact on Model Output)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_diabetes_model_output",
+      "label": "Diabetes Model Output (Predicted Risk/Score)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_glucose",
+      "label": "Glucose",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_age_bmi_interaction",
+      "label": "Age_BMI_Interaction",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_bmi",
+      "label": "BMI",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_bp_bmi_interaction",
+      "label": "BP_BMI_Interaction",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_glucose_insulin_ratio",
+      "label": "Glucose_Insulin_Ratio",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_skin_thickness",
+      "label": "SkinThickness",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_age",
+      "label": "Age",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_insulin",
+      "label": "Insulin",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_high_feature_value",
+      "label": "High Feature Value (Red)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_low_feature_value",
+      "label": "Low Feature Value (Blue)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_positive_shap",
+      "label": "Positive SHAP Contribution",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_negative_shap",
+      "label": "Negative SHAP Contribution",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "img_shap_beeswarm_diabetes",
+      "target": "concept_shap_beeswarm_plot",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "concept_shap_value",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_value",
+      "target": "concept_diabetes_model_output",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "feature_glucose",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "feature_age_bmi_interaction",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "feature_bmi",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "feature_bp_bmi_interaction",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "feature_glucose_insulin_ratio",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "feature_skin_thickness",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "feature_age",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_shap_beeswarm_plot",
+      "target": "feature_insulin",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_high_feature_value",
+      "target": "concept_positive_shap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_low_feature_value",
+      "target": "concept_negative_shap",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_glucose",
+      "target": "concept_diabetes_model_output",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_glucose",
+      "target": "concept_positive_shap",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_glucose",
+      "target": "concept_negative_shap",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_age_bmi_interaction",
+      "target": "concept_diabetes_model_output",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_bmi",
+      "target": "concept_diabetes_model_output",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_bp_bmi_interaction",
+      "target": "concept_diabetes_model_output",
+      "relation": "rationale_for",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_glucose_insulin_ratio",
+      "target": "concept_diabetes_model_output",
+      "relation": "rationale_for",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.55,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_skin_thickness",
+      "target": "concept_diabetes_model_output",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_age",
+      "target": "concept_diabetes_model_output",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_insulin",
+      "target": "concept_diabetes_model_output",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "diabetes_shap_feature_importance_ranking",
+      "label": "Diabetes SHAP Feature Importance (Top to Bottom)",
+      "nodes": [
+        "feature_glucose",
+        "feature_age_bmi_interaction",
+        "feature_bmi",
+        "feature_bp_bmi_interaction",
+        "feature_glucose_insulin_ratio",
+        "feature_skin_thickness",
+        "feature_age",
+        "feature_insulin"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png"
+    },
+    {
+      "id": "diabetes_shap_color_encoding",
+      "label": "Beeswarm Color Encoding (Feature Value)",
+      "nodes": [
+        "concept_high_feature_value",
+        "concept_low_feature_value",
+        "concept_shap_beeswarm_plot"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reports/generated/shap_summary_beeswarm_diabetes.png"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

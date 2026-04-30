@@ -1,0 +1,392 @@
+{
+  "nodes": [
+    {
+      "id": "shap_global_bar_heart_img",
+      "label": "SHAP Global Feature Importance (Heart) - Bar Chart",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_concept_plot",
+      "label": "SHAP Global Bar Plot (mean(|SHAP value|))",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_concept_mean_abs_shap",
+      "label": "mean(|SHAP value|) (Global importance magnitude)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_concept_heart_model_output",
+      "label": "Heart Disease Model Output (Predicted Risk/Score)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_cp_4",
+      "label": "cp_4",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_thal_7",
+      "label": "thal_7",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_age",
+      "label": "age",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_oldpeak",
+      "label": "oldpeak",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_slope_2",
+      "label": "slope_2",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_sex_1",
+      "label": "sex_1",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_thalach",
+      "label": "thalach",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_ca_2",
+      "label": "ca_2",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_exang_1",
+      "label": "exang_1",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "shap_global_bar_heart_feature_cp_3",
+      "label": "cp_3",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "shap_global_bar_heart_img",
+      "target": "shap_global_bar_heart_concept_plot",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_mean_abs_shap",
+      "target": "shap_global_bar_heart_concept_heart_model_output",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_cp_4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_thal_7",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_age",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_oldpeak",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_slope_2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_sex_1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_thalach",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_ca_2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_exang_1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_global_bar_heart_concept_plot",
+      "target": "shap_global_bar_heart_feature_cp_3",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.99,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+
+    {
+      "source": "shap_global_bar_heart_feature_cp_4",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.83
+    },
+    {
+      "source": "shap_global_bar_heart_feature_thal_7",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.79
+    },
+    {
+      "source": "shap_global_bar_heart_feature_age",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.47
+    },
+    {
+      "source": "shap_global_bar_heart_feature_oldpeak",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.36
+    },
+    {
+      "source": "shap_global_bar_heart_feature_slope_2",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.27
+    },
+    {
+      "source": "shap_global_bar_heart_feature_sex_1",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.26
+    },
+    {
+      "source": "shap_global_bar_heart_feature_thalach",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.23
+    },
+    {
+      "source": "shap_global_bar_heart_feature_ca_2",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.18
+    },
+    {
+      "source": "shap_global_bar_heart_feature_exang_1",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.1
+    },
+    {
+      "source": "shap_global_bar_heart_feature_cp_3",
+      "target": "shap_global_bar_heart_concept_mean_abs_shap",
+      "relation": "has_mean_abs_shap_value",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_global_bar_heart.png",
+      "source_location": null,
+      "weight": 0.07
+    }
+  ]
+}

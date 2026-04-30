@@ -20,6 +20,7 @@ from anomaly_detection import detect_anomalies
 from data_preprocessing import handle_missing_values, replace_zero_with_nan
 from explainability import compute_shap_values
 from feature_engineering import build_feature_matrix
+from report_generator import generate_patient_report
 
 
 st.set_page_config(page_title="Medical Disease Risk Dashboard", layout="wide")
@@ -46,13 +47,13 @@ DISEASE_CFG = {
         "zero_invalid": [],
         "category_labels": {
             "sex": {0: "Female", 1: "Male"},
-            "cp": {0: "Typical Angina", 1: "Atypical Angina", 2: "Non-anginal Pain", 3: "Asymptomatic"},
+            "cp": {1: "Typical Angina", 2: "Atypical Angina", 3: "Non-anginal Pain", 4: "Asymptomatic"},
             "fbs": {0: "<= 120 mg/dl", 1: "> 120 mg/dl"},
             "restecg": {0: "Normal", 1: "ST-T Abnormality", 2: "LV Hypertrophy"},
             "exang": {0: "No", 1: "Yes"},
-            "slope": {0: "Upsloping", 1: "Flat", 2: "Downsloping"},
+            "slope": {1: "Upsloping", 2: "Flat", 3: "Downsloping"},
             "ca": {0: "0 Vessels", 1: "1 Vessel", 2: "2 Vessels", 3: "3 Vessels", 4: "4 Vessels"},
-            "thal": {0: "Unknown", 1: "Normal", 2: "Fixed Defect", 3: "Reversible Defect"},
+            "thal": {3: "Normal", 6: "Fixed Defect", 7: "Reversible Defect"},
         },
     },
 }
@@ -293,6 +294,463 @@ def _list_comparison_models() -> dict[str, object]:
     return models
 
 
+def _assessment_risk_band(prob: float) -> str:
+    if prob < 0.4:
+        return "Low"
+    if prob <= 0.7:
+        return "Moderate"
+    return "High"
+
+
+def _assessment_risk_color(prob: float) -> str:
+    if prob < 0.4:
+        return "#2E8B57"
+    if prob <= 0.7:
+        return "#D18B00"
+    return "#B22222"
+
+
+def _assessment_gauge(prob: float, disease: str) -> go.Figure:
+    color = _assessment_risk_color(prob)
+    band = _assessment_risk_band(prob)
+    fig = go.Figure(
+        go.Indicator(
+            mode="gauge+number",
+            value=prob * 100,
+            number={"suffix": "%"},
+            title={"text": f"{disease} Self-Assessment Risk · {band}"},
+            gauge={
+                "axis": {"range": [0, 100]},
+                "bar": {"color": color},
+                "steps": [
+                    {"range": [0, 40], "color": "rgba(46,139,87,0.18)"},
+                    {"range": [40, 70], "color": "rgba(209,139,0,0.18)"},
+                    {"range": [70, 100], "color": "rgba(178,34,34,0.18)"},
+                ],
+                "threshold": {"line": {"color": color, "width": 4}, "thickness": 0.75, "value": prob * 100},
+            },
+        )
+    )
+    fig.update_layout(height=380, margin={"l": 20, "r": 20, "t": 70, "b": 20})
+    return fig
+
+
+def _assessment_card(prob: float, disease: str) -> str:
+    if prob < 0.4:
+        title = "Low Risk"
+        message = "maintain healthy habits"
+        bg = "#E8F5E9"
+        border = "#2E8B57"
+    elif prob <= 0.7:
+        title = "Moderate Risk"
+        message = "consult your doctor"
+        bg = "#FFF4D6"
+        border = "#D18B00"
+    else:
+        title = "High Risk"
+        message = "seek medical attention soon"
+        bg = "#FDECEC"
+        border = "#B22222"
+
+    return (
+        f"<div style='padding: 1rem 1.1rem; border-radius: 16px; background: {bg}; border: 2px solid {border};'>"
+        f"<div style='font-size: 1.1rem; font-weight: 700; color: {border};'>{disease}: {title}</div>"
+        f"<div style='margin-top: 0.35rem; font-size: 0.98rem; color: #24303f;'>"
+        f"{title} — {message}."
+        f"</div></div>"
+    )
+
+
+def _feature_label(feature: str, disease: str) -> str:
+    diabetes_labels = {
+        "Pregnancies": "pregnancy count",
+        "Glucose": "glucose level",
+        "BloodPressure": "blood pressure",
+        "SkinThickness": "skin fold thickness",
+        "Insulin": "insulin level",
+        "BMI": "BMI",
+        "DiabetesPedigreeFunction": "family history of diabetes",
+        "Age": "age",
+        "BMI_Category": "BMI category",
+        "Age_Group": "age group",
+    }
+    heart_labels = {
+        "age": "age",
+        "sex": "biological sex",
+        "cp": "chest pain type",
+        "trestbps": "resting blood pressure",
+        "chol": "cholesterol level",
+        "fbs": "fasting blood sugar",
+        "restecg": "resting ECG result",
+        "thalach": "maximum heart rate",
+        "exang": "exercise chest pain",
+        "oldpeak": "ST depression during exercise",
+        "slope": "exercise ST segment slope",
+        "ca": "major vessels visible by fluoroscopy",
+        "thal": "thalassemia type",
+    }
+
+    if disease == "Diabetes":
+        if feature.startswith("BMI_Category_"):
+            return f"BMI category: {feature.split('_', 2)[-1].replace('_', ' ')}"
+        if feature.startswith("Age_Group_"):
+            return f"age group: {feature.split('_', 2)[-1].replace('_', ' ')}"
+        return diabetes_labels.get(feature, feature.replace("_", " ").lower())
+
+    if feature == "sex_1":
+        return "biological sex: male"
+    if feature.startswith("cp_"):
+        cp_map = {"1": "Typical angina", "2": "Atypical angina", "3": "Non-anginal pain", "4": "Asymptomatic"}
+        code = feature.split("_", 1)[1]
+        return f"chest pain type: {cp_map.get(code, code)}"
+    if feature.startswith("fbs_"):
+        return "fasting blood sugar above 120 mg/dL"
+    if feature.startswith("restecg_"):
+        ecg_map = {"1": "ST-T wave abnormality", "2": "Left ventricular hypertrophy"}
+        code = feature.split("_", 1)[1]
+        return f"resting ECG: {ecg_map.get(code, code)}"
+    if feature.startswith("exang_"):
+        return "exercise-induced chest pain: yes"
+    if feature.startswith("slope_"):
+        slope_map = {"1": "Upsloping", "2": "Flat", "3": "Downsloping"}
+        code = feature.split("_", 1)[1]
+        return f"exercise ST slope: {slope_map.get(code, code)}"
+    if feature.startswith("ca_"):
+        code = feature.split("_", 1)[1]
+        return f"major vessels visible: {code}"
+    if feature.startswith("thal_"):
+        thal_map = {"6": "Fixed defect", "7": "Reversible defect"}
+        code = feature.split("_", 1)[1]
+        return f"thalassemia type: {thal_map.get(code, code)}"
+    return heart_labels.get(feature, feature.replace("_", " ").lower())
+
+
+def _plain_shap_sentence(feature: str, impact: float, disease: str) -> str:
+    label = _feature_label(feature, disease)
+    if impact >= 0:
+        return f"Your {label} is pushing the risk higher."
+    return f"Your {label} is pulling the risk lower."
+
+
+def _load_assessment_context(disease: str) -> dict[str, Any] | None:
+    model, meta, dataset = _load_disease_assets(disease)
+    if model is None or meta is None or dataset is None:
+        return None
+
+    feature_order = list(meta.get("features", []))
+    if not feature_order:
+        return None
+
+    target_col = DISEASE_CFG[disease]["target"]
+    zero_invalid_cols = DISEASE_CFG[disease]["zero_invalid"]
+    meta_raw_columns = list(meta.get("raw_columns", []))
+    if not meta_raw_columns:
+        meta_raw_columns = [c for c in dataset.columns if c != target_col]
+    meta_categorical = [c for c in meta.get("categorical_columns", []) if c in meta_raw_columns]
+    ref_transform = _fit_reference_transform(dataset, target_col, zero_invalid_cols, categorical_columns=meta_categorical)
+
+    X_model_all, _ = _transform_dataset_to_model_features(
+        dataset,
+        target_col,
+        ref_transform,
+        feature_order,
+        zero_invalid_cols,
+    )
+
+    return {
+        "model": model,
+        "meta": meta,
+        "dataset": dataset,
+        "feature_order": feature_order,
+        "ref_transform": ref_transform,
+        "X_model_all": X_model_all,
+        "target_col": target_col,
+        "zero_invalid_cols": zero_invalid_cols,
+    }
+
+
+def _build_assessment_result(disease: str, raw_patient: dict[str, Any]) -> dict[str, Any] | None:
+    context = _load_assessment_context(disease)
+    if context is None:
+        return None
+
+    patient_raw_df = pd.DataFrame([raw_patient])
+    patient_df = _transform_raw_to_model_features(
+        patient_raw_df,
+        context["ref_transform"],
+        context["feature_order"],
+        context["zero_invalid_cols"],
+    )
+
+    risk_prob = float(context["model"].predict_proba(patient_df)[0][1])
+    background = context["X_model_all"].sample(min(200, len(context["X_model_all"])), random_state=42) if not context["X_model_all"].empty else patient_df
+    explainer, shap_values = compute_shap_values(context["model"], background, patient_df)
+
+    shap_array = shap_values.values
+    if shap_array.ndim == 3:
+        shap_array = shap_array[:, :, 1] if shap_array.shape[2] > 1 else shap_array[:, :, 0]
+
+    row_impact = shap_array[0]
+    ranked = np.argsort(np.abs(row_impact))[::-1][:3]
+    top_factors = [_plain_shap_sentence(context["feature_order"][idx], float(row_impact[idx]), disease) for idx in ranked]
+
+    report_path = generate_patient_report(
+        patient_df.iloc[0].to_dict(),
+        context["model"],
+        explainer,
+        context["feature_order"],
+        filename_prefix=f"{disease.lower().replace(' ', '_')}_self_assessment",
+    )
+
+    return {
+        "probability": risk_prob,
+        "band": _assessment_risk_band(risk_prob),
+        "top_factors": top_factors,
+        "report_path": report_path,
+    }
+
+
+def _render_assessment_result(disease: str, result: dict[str, Any]) -> None:
+    st.plotly_chart(_assessment_gauge(float(result["probability"]), disease), use_container_width=True)
+
+    left, right = st.columns([1.2, 0.8])
+    with left:
+        st.markdown(_assessment_card(float(result["probability"]), disease), unsafe_allow_html=True)
+    with right:
+        st.metric("Risk Band", result["band"])
+        st.metric("Estimated Risk", f"{float(result['probability']) * 100:.1f}%")
+
+    st.subheader("Top 3 SHAP factors")
+    for factor in result["top_factors"]:
+        st.write(factor)
+
+    report_path = Path(result["report_path"])
+    if report_path.exists():
+        st.download_button(
+            "Download My Report",
+            data=report_path.read_bytes(),
+            file_name=report_path.name,
+            mime="application/pdf",
+        )
+    else:
+        st.info("The PDF report could not be found. Please submit the assessment again.")
+
+
+def _render_diabetes_self_assessment() -> None:
+    st.subheader("Diabetes")
+    st.info("These questions use everyday language. If you know your recent clinic numbers, enter those values; if not, use your best estimate.")
+
+    with st.form("diabetes_self_assessment_form"):
+        left, right = st.columns(2)
+
+        with left:
+            age = st.number_input("How old are you?", min_value=1, max_value=100, value=40, step=1, help="Age in years.")
+            sex = st.selectbox(
+                "What is your biological sex?",
+                ["Female", "Male"],
+                help="This is only used to decide whether the pregnancy question applies.",
+            )
+            pregnancies = 0
+            if sex == "Female":
+                pregnancies = st.number_input(
+                    "How many times have you been pregnant?",
+                    min_value=0,
+                    max_value=20,
+                    value=0,
+                    step=1,
+                    help="Use 0 if you have never been pregnant.",
+                )
+            glucose = st.number_input(
+                "What was your last fasting blood sugar reading? (mg/dL)",
+                min_value=70,
+                max_value=200,
+                value=100,
+                step=1,
+                help="This is your blood sugar after not eating for several hours.",
+            )
+            bmi = st.number_input(
+                "What is your BMI?",
+                min_value=10.0,
+                max_value=70.0,
+                value=25.0,
+                step=0.1,
+                help="BMI is a weight-to-height ratio used to estimate body fat.",
+            )
+            with st.expander("BMI helper: calculate BMI from weight and height"):
+                bmi_helper_cols = st.columns(2)
+                with bmi_helper_cols[0]:
+                    helper_weight = st.number_input("Weight (kg)", min_value=20.0, max_value=350.0, value=70.0, step=0.5)
+                with bmi_helper_cols[1]:
+                    helper_height = st.number_input("Height (m)", min_value=1.0, max_value=2.5, value=1.7, step=0.01)
+                helper_bmi = helper_weight / (helper_height ** 2) if helper_height > 0 else 0.0
+                st.caption(f"Estimated BMI: {helper_bmi:.1f}")
+                st.caption("Formula: weight in kilograms divided by height in meters squared.")
+
+        with right:
+            blood_pressure = st.number_input(
+                "What is your blood pressure? (mm Hg)",
+                min_value=40,
+                max_value=140,
+                value=80,
+                step=1,
+                help="This is the pressure inside your arteries when your heart pumps.",
+            )
+            skin_thickness = st.number_input(
+                "What is your skin fold thickness? (mm) — ask your doctor",
+                min_value=0,
+                max_value=100,
+                value=20,
+                step=1,
+                help="A measurement of the fat layer under the skin, usually taken in clinic.",
+            )
+            insulin = st.number_input(
+                "What is your insulin level? (mu U/ml)",
+                min_value=0,
+                max_value=900,
+                value=80,
+                step=1,
+                help="Insulin is the hormone that helps move sugar from blood into cells.",
+            )
+            diabetes_history = st.selectbox(
+                "Do you have a family history of diabetes?",
+                ["No", "Somewhat", "Yes"],
+                help="This maps to a simple risk score used by the model.",
+            )
+
+        submitted = st.form_submit_button("Check My Diabetes Risk")
+
+    if submitted:
+        raw_patient = {
+            "Pregnancies": int(pregnancies),
+            "Glucose": float(glucose),
+            "BloodPressure": float(blood_pressure),
+            "SkinThickness": float(skin_thickness),
+            "Insulin": float(insulin),
+            "BMI": float(bmi),
+            "DiabetesPedigreeFunction": {"No": 0.1, "Somewhat": 0.4, "Yes": 0.8}[diabetes_history],
+            "Age": float(age),
+        }
+        result = _build_assessment_result("Diabetes", raw_patient)
+        if result is None:
+            st.error("Diabetes model artifacts are not available.")
+        else:
+            st.session_state.setdefault("self_assessment_results", {})["Diabetes"] = result
+
+    result = st.session_state.get("self_assessment_results", {}).get("Diabetes")
+    if result:
+        _render_assessment_result("Diabetes", result)
+
+
+def _render_heart_self_assessment() -> None:
+    st.subheader("Heart Disease")
+    st.info("These questions ask about common heart-health measurements. If you do not know a value, use your latest clinic result or ask your clinician.")
+
+    with st.form("heart_self_assessment_form"):
+        left, right = st.columns(2)
+
+        with left:
+            age = st.number_input("How old are you?", min_value=18, max_value=100, value=50, step=1, help="Age in years.")
+            sex_label = st.selectbox("What is your biological sex?", ["Female", "Male"], help="The model uses this as a coded input.")
+            chest_pain_label = st.selectbox(
+                "Do you experience chest pain? If yes, what type?",
+                ["No pain", "Typical angina", "Atypical angina", "Non-anginal", "Asymptomatic"],
+                help="Chest pain is discomfort or pressure in the chest.",
+            )
+            trestbps = st.number_input(
+                "What is your resting blood pressure? (mm Hg)",
+                min_value=80,
+                max_value=200,
+                value=120,
+                step=1,
+                help="This is the blood pressure measured when you are at rest.",
+            )
+            chol = st.number_input(
+                "What is your cholesterol level? (mg/dL)",
+                min_value=100,
+                max_value=600,
+                value=200,
+                step=1,
+                help="Cholesterol is a fat-like substance in your blood.",
+            )
+            fbs_label = st.selectbox(
+                "Is your fasting blood sugar above 120 mg/dL?",
+                ["No", "Yes"],
+                help="This checks whether your blood sugar is above the normal fasting threshold.",
+            )
+            restecg_label = st.selectbox(
+                "What was your resting ECG result?",
+                ["Normal", "ST-T wave abnormality", "Left ventricular hypertrophy"],
+                help="An ECG records the heart's electrical activity.",
+            )
+            thalach = st.number_input(
+                "What is your maximum heart rate achieved?",
+                min_value=60,
+                max_value=220,
+                value=150,
+                step=1,
+                help="This is the fastest your heart rate reached during exercise testing.",
+            )
+            exang_label = st.selectbox(
+                "Do you experience chest pain during exercise?",
+                ["No", "Yes"],
+                help="Exercise-induced chest pain can be a sign of reduced blood flow to the heart.",
+            )
+
+        with right:
+            oldpeak = st.number_input(
+                "ST depression during exercise (oldpeak)",
+                min_value=0.0,
+                max_value=6.0,
+                value=1.0,
+                step=0.1,
+                help="Ask your cardiologist for this value from your ECG report.",
+            )
+            st.info("Oldpeak is the amount the ECG pattern changes during exercise. Higher values can suggest the heart is under more strain.")
+            slope_label = st.selectbox(
+                "Slope of peak exercise ST segment",
+                ["Upsloping", "Flat", "Downsloping"],
+                help="This describes the shape of the ECG line after exercise.",
+            )
+            ca = st.selectbox(
+                "Number of major vessels coloured by fluoroscopy",
+                [0, 1, 2, 3],
+                help="Fluoroscopy is an imaging test that can show blood vessels around the heart.",
+            )
+            thal_label = st.selectbox(
+                "Thalassemia type",
+                ["Normal", "Fixed defect", "Reversible defect"],
+                help="This is a heart-imaging marker that can suggest how blood flows through the heart muscle.",
+            )
+
+        submitted = st.form_submit_button("Check My Heart Disease Risk")
+
+    if submitted:
+        raw_patient = {
+            "age": float(age),
+            "sex": 0 if sex_label == "Female" else 1,
+            "cp": {"No pain": 0, "Typical angina": 1, "Atypical angina": 2, "Non-anginal": 3, "Asymptomatic": 4}[chest_pain_label],
+            "trestbps": float(trestbps),
+            "chol": float(chol),
+            "fbs": 1 if fbs_label == "Yes" else 0,
+            "restecg": {"Normal": 0, "ST-T wave abnormality": 1, "Left ventricular hypertrophy": 2}[restecg_label],
+            "thalach": float(thalach),
+            "exang": 1 if exang_label == "Yes" else 0,
+            "oldpeak": float(oldpeak),
+            "slope": {"Upsloping": 1, "Flat": 2, "Downsloping": 3}[slope_label],
+            "ca": int(ca),
+            "thal": {"Normal": 3, "Fixed defect": 6, "Reversible defect": 7}[thal_label],
+        }
+        result = _build_assessment_result("Heart Disease", raw_patient)
+        if result is None:
+            st.error("Heart disease model artifacts are not available.")
+        else:
+            st.session_state.setdefault("self_assessment_results", {})["Heart Disease"] = result
+
+    result = st.session_state.get("self_assessment_results", {}).get("Heart Disease")
+    if result:
+        _render_assessment_result("Heart Disease", result)
+
+
 disease = st.sidebar.selectbox("Disease", list(DISEASE_CFG.keys()))
 model, meta, dataset = _load_disease_assets(disease)
 
@@ -331,11 +789,12 @@ X_model_all, y_all = _transform_dataset_to_model_features(
     zero_invalid_cols,
 )
 
-pred_tab, shap_tab, comp_tab, anomaly_tab = st.tabs([
+pred_tab, shap_tab, comp_tab, anomaly_tab, self_tab = st.tabs([
     "Prediction",
     "SHAP Explanation",
     "Model Comparison",
     "Anomaly Detection",
+    "Patient Self-Assessment",
 ])
 
 with pred_tab:
@@ -439,3 +898,18 @@ with anomaly_tab:
             st.dataframe(result, use_container_width=True)
         else:
             st.success("No anomalies detected with current settings.")
+
+with self_tab:
+    st.subheader("Patient Self-Assessment")
+    diabetes_tab, heart_tab = st.tabs(["Diabetes", "Heart Disease"])
+
+    with diabetes_tab:
+        _render_diabetes_self_assessment()
+
+    with heart_tab:
+        _render_heart_self_assessment()
+
+    st.markdown("---")
+    st.caption(
+        "This tool is for informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional."
+    )

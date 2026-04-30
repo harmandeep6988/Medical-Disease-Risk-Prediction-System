@@ -1,0 +1,331 @@
+{
+  "nodes": [
+    {
+      "id": "shap_waterfall_patient_diabetes",
+      "label": "SHAP Waterfall (Patient-level) — Diabetes",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "diabetes_model_output_fx_1_856",
+      "label": "Model output f(x) = 1.856 (log-odds / raw score)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "diabetes_model_baseline_expected_-0_135",
+      "label": "Baseline E[f(X)] = -0.135",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_glucose_value_0_72",
+      "label": "Feature: Glucose = 0.72 (positive contribution +2.42)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_bmi_value_0_287",
+      "label": "Feature: BMI = 0.287 (negative contribution −0.91)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_glucose_insulin_ratio_value_1_366",
+      "label": "Feature: Glucose_Insulin_Ratio = 1.366 (small positive contribution shown as “+0.2…”, exact hundredths not fully legible)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_age_bmi_interaction_value_0_12",
+      "label": "Feature: Age_BMI_Interaction = 0.12 (small positive contribution shown as “+0.2…”, exact hundredths not fully legible)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_insulin_value_0_527",
+      "label": "Feature: Insulin = 0.527 (positive contribution +0.05)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_bp_bmi_interaction_value_0_108",
+      "label": "Feature: BP_BMI_Interaction = 0.108 (positive contribution +0.03)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_skin_thickness_value_0_518",
+      "label": "Feature: SkinThickness = 0.518 (negative contribution −0.03)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_age_value_0_418",
+      "label": "Feature: Age = 0.418 (positive contribution +0.02)",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "diabetes_model_baseline_expected_-0_135",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "feature_glucose_value_0_72",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "feature_bmi_value_0_287",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "feature_glucose_insulin_ratio_value_1_366",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "feature_age_bmi_interaction_value_0_12",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "feature_insulin_value_0_527",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "feature_bp_bmi_interaction_value_0_108",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "feature_skin_thickness_value_0_518",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_waterfall_patient_diabetes",
+      "target": "feature_age_value_0_418",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "feature_glucose_value_0_72",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 2.42
+    },
+    {
+      "source": "feature_bmi_value_0_287",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 0.91
+    },
+    {
+      "source": "feature_glucose_insulin_ratio_value_1_366",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "rationale_for",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 0.2
+    },
+    {
+      "source": "feature_age_bmi_interaction_value_0_12",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "rationale_for",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 0.2
+    },
+    {
+      "source": "feature_insulin_value_0_527",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 0.05
+    },
+    {
+      "source": "feature_bp_bmi_interaction_value_0_108",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 0.03
+    },
+    {
+      "source": "feature_skin_thickness_value_0_518",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 0.03
+    },
+    {
+      "source": "feature_age_value_0_418",
+      "target": "diabetes_model_output_fx_1_856",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png",
+      "source_location": null,
+      "weight": 0.02
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "diabetes_shap_waterfall_patient_explanation",
+      "label": "Diabetes Patient Prediction Explanation (SHAP Waterfall)",
+      "nodes": [
+        "diabetes_model_baseline_expected_-0_135",
+        "feature_glucose_value_0_72",
+        "feature_bmi_value_0_287",
+        "feature_glucose_insulin_ratio_value_1_366",
+        "feature_age_bmi_interaction_value_0_12",
+        "feature_insulin_value_0_527",
+        "feature_bp_bmi_interaction_value_0_108",
+        "feature_skin_thickness_value_0_518",
+        "feature_age_value_0_418",
+        "diabetes_model_output_fx_1_856"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/shap_waterfall_patient_diabetes.png"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

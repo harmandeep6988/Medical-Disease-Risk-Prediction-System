@@ -1,0 +1,487 @@
+{
+  "nodes": [
+    {
+      "id": "img_model_comparison_diabetes",
+      "label": "Diabetes Model Comparison Across Metrics (Bar Chart)",
+      "file_type": "image",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_diabetes_model_evaluation",
+      "label": "Diabetes Model Evaluation (Cross-metric comparison)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_gradient_boosting",
+      "label": "GradientBoosting (Diabetes classifier)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_random_forest",
+      "label": "RandomForest (Diabetes classifier)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_xgboost",
+      "label": "XGBoost (Diabetes classifier)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_logistic_regression",
+      "label": "LogisticRegression (Diabetes classifier)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_accuracy",
+      "label": "Metric: Accuracy",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_precision",
+      "label": "Metric: Precision",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_recall",
+      "label": "Metric: Recall",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_f1_score",
+      "label": "Metric: F1 Score",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_auc_roc",
+      "label": "Metric: AUC-ROC",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "obs_diabetes_ensemble_strong_auc",
+      "label": "Observation: Tree/boosting models show higher AUC-ROC (~0.82–0.83) than LogisticRegression (~0.80)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "obs_diabetes_logreg_lower_overall",
+      "label": "Observation: LogisticRegression underperforms on accuracy/precision/recall/F1 compared to ensemble models",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_training_evaluation_pipeline",
+      "label": "Training & Evaluation Pipeline (train models, compute metrics, compare)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "model_gradient_boosting",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "model_random_forest",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "model_xgboost",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "model_logistic_regression",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "metric_accuracy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "metric_precision",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "metric_recall",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "metric_f1_score",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "img_model_comparison_diabetes",
+      "target": "metric_auc_roc",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_diabetes_model_evaluation",
+      "target": "img_model_comparison_diabetes",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_diabetes_model_evaluation",
+      "target": "concept_training_evaluation_pipeline",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "model_gradient_boosting",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "model_random_forest",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "model_xgboost",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "model_logistic_regression",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "metric_accuracy",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "metric_precision",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "metric_recall",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "metric_f1_score",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "concept_training_evaluation_pipeline",
+      "target": "metric_auc_roc",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "obs_diabetes_ensemble_strong_auc",
+      "target": "img_model_comparison_diabetes",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "obs_diabetes_ensemble_strong_auc",
+      "target": "metric_auc_roc",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "obs_diabetes_ensemble_strong_auc",
+      "target": "model_gradient_boosting",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "obs_diabetes_ensemble_strong_auc",
+      "target": "model_random_forest",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "obs_diabetes_ensemble_strong_auc",
+      "target": "model_xgboost",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "obs_diabetes_logreg_lower_overall",
+      "target": "img_model_comparison_diabetes",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "obs_diabetes_logreg_lower_overall",
+      "target": "model_logistic_regression",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "model_gradient_boosting",
+      "target": "model_random_forest",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "model_random_forest",
+      "target": "model_xgboost",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_diabetes.png",
+      "source_location": null,
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "diabetes_model_metric_comparison",
+      "label": "Diabetes Model Comparison Across Metrics",
+      "nodes": [
+        "img_model_comparison_diabetes",
+        "model_gradient_boosting",
+        "model_random_forest",
+        "model_xgboost",
+        "model_logistic_regression",
+        "metric_accuracy",
+        "metric_precision",
+        "metric_recall",
+        "metric_f1_score",
+        "metric_auc_roc"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reports/generated/model_comparison_diabetes.png"
+    },
+    {
+      "id": "diabetes_training_evaluation_link",
+      "label": "Training/Evaluation Pipeline Produces Metric Comparison Artifact",
+      "nodes": [
+        "concept_training_evaluation_pipeline",
+        "concept_diabetes_model_evaluation",
+        "img_model_comparison_diabetes"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "reports/generated/model_comparison_diabetes.png"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

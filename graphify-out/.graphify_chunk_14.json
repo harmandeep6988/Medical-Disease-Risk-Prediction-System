@@ -1,0 +1,582 @@
+{
+  "nodes": [
+    {
+      "id": "shap_beeswarm_heart_plot",
+      "label": "SHAP Summary (Beeswarm) — Heart",
+      "file_type": "image",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "heart_model_output",
+      "label": "Model Output (as shown on SHAP axis)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_cp_4",
+      "label": "Feature: cp_4",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_thal_7",
+      "label": "Feature: thal_7",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_age",
+      "label": "Feature: age",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_oldpeak",
+      "label": "Feature: oldpeak",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_slope_2",
+      "label": "Feature: slope_2",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_sex_1",
+      "label": "Feature: sex_1",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_thalach",
+      "label": "Feature: thalach",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_ca_2",
+      "label": "Feature: ca_2",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_exang_1",
+      "label": "Feature: exang_1",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature_cp_3",
+      "label": "Feature: cp_3",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_cp_4_high_increases_output",
+      "label": "cp_4 high (red) tends to increase model output (positive SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_thal_7_high_increases_output",
+      "label": "thal_7 high (red) tends to increase model output (positive SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_age_high_increases_output",
+      "label": "age high (red) tends to increase model output (positive SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_oldpeak_high_increases_output",
+      "label": "oldpeak high (red) tends to increase model output (positive SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_slope_2_high_increases_output",
+      "label": "slope_2 high (red) tends to increase model output (positive SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_sex_1_high_increases_output",
+      "label": "sex_1 high (red) tends to increase model output (positive SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_thalach_high_decreases_output",
+      "label": "thalach high (red) tends to decrease model output (negative SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_ca_2_high_increases_output",
+      "label": "ca_2 high (red) tends to increase model output (positive SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_exang_1_high_increases_output",
+      "label": "exang_1 high (red) tends to increase model output (positive SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "effect_cp_3_high_decreases_output",
+      "label": "cp_3 high (red) tends to decrease model output (negative SHAP)",
+      "file_type": "document",
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "heart_model_output",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_cp_4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_thal_7",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_age",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_oldpeak",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_slope_2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_sex_1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_thalach",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_ca_2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_exang_1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "shap_beeswarm_heart_plot",
+      "target": "feature_cp_3",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_cp_4_high_increases_output",
+      "target": "feature_cp_4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_cp_4_high_increases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_thal_7_high_increases_output",
+      "target": "feature_thal_7",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_thal_7_high_increases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_age_high_increases_output",
+      "target": "feature_age",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_age_high_increases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_oldpeak_high_increases_output",
+      "target": "feature_oldpeak",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_oldpeak_high_increases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_slope_2_high_increases_output",
+      "target": "feature_slope_2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_slope_2_high_increases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_sex_1_high_increases_output",
+      "target": "feature_sex_1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_sex_1_high_increases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_thalach_high_decreases_output",
+      "target": "feature_thalach",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_thalach_high_decreases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_ca_2_high_increases_output",
+      "target": "feature_ca_2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_ca_2_high_increases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_exang_1_high_increases_output",
+      "target": "feature_exang_1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_exang_1_high_increases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.75,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_cp_3_high_decreases_output",
+      "target": "feature_cp_3",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "effect_cp_3_high_decreases_output",
+      "target": "heart_model_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png",
+      "source_location": null,
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "heart_shap_top_features",
+      "label": "Top Features by SHAP Impact (Heart Beeswarm Order)",
+      "nodes": [
+        "feature_cp_4",
+        "feature_thal_7",
+        "feature_age",
+        "feature_oldpeak",
+        "feature_slope_2",
+        "feature_sex_1",
+        "feature_thalach",
+        "feature_ca_2",
+        "feature_exang_1",
+        "feature_cp_3"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reports/generated/shap_summary_beeswarm_heart.png"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

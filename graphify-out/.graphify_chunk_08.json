@@ -1,0 +1,452 @@
+{
+  "nodes": [
+    {
+      "id": "session_validatetoken",
+      "label": "Model Comparison Across Metrics (Heart)",
+      "file_type": "image",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "task_heart_disease_risk_prediction",
+      "label": "Heart Disease Risk Prediction",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_xgboost",
+      "label": "XGBoost (Heart Model)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_logistic_regression",
+      "label": "Logistic Regression (Heart Model)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_random_forest",
+      "label": "Random Forest (Heart Model)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_gradient_boosting",
+      "label": "Gradient Boosting (Heart Model)",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_accuracy",
+      "label": "Accuracy",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_precision",
+      "label": "Precision",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_recall",
+      "label": "Recall",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_f1_score",
+      "label": "F1 Score",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "metric_auc_roc",
+      "label": "AUC-ROC",
+      "file_type": "document",
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "session_validatetoken",
+      "target": "model_xgboost",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "model_logistic_regression",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "model_random_forest",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "model_gradient_boosting",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "metric_accuracy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "metric_precision",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "metric_recall",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "metric_f1_score",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "metric_auc_roc",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "session_validatetoken",
+      "target": "task_heart_disease_risk_prediction",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "model_xgboost",
+      "target": "metric_accuracy",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.88
+    },
+    {
+      "source": "model_xgboost",
+      "target": "metric_precision",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.89
+    },
+    {
+      "source": "model_xgboost",
+      "target": "metric_recall",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.86
+    },
+    {
+      "source": "model_xgboost",
+      "target": "metric_f1_score",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.87
+    },
+    {
+      "source": "model_xgboost",
+      "target": "metric_auc_roc",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.94
+    },
+    {
+      "source": "model_logistic_regression",
+      "target": "metric_accuracy",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.86
+    },
+    {
+      "source": "model_logistic_regression",
+      "target": "metric_precision",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "model_logistic_regression",
+      "target": "metric_recall",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "model_logistic_regression",
+      "target": "metric_f1_score",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "model_logistic_regression",
+      "target": "metric_auc_roc",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.93
+    },
+    {
+      "source": "model_random_forest",
+      "target": "metric_accuracy",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "model_random_forest",
+      "target": "metric_precision",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.89
+    },
+    {
+      "source": "model_random_forest",
+      "target": "metric_recall",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.89
+    },
+    {
+      "source": "model_random_forest",
+      "target": "metric_f1_score",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.89
+    },
+    {
+      "source": "model_random_forest",
+      "target": "metric_auc_roc",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.93
+    },
+    {
+      "source": "model_gradient_boosting",
+      "target": "metric_accuracy",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.88
+    },
+    {
+      "source": "model_gradient_boosting",
+      "target": "metric_precision",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.89
+    },
+    {
+      "source": "model_gradient_boosting",
+      "target": "metric_recall",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.86
+    },
+    {
+      "source": "model_gradient_boosting",
+      "target": "metric_f1_score",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.87
+    },
+    {
+      "source": "model_gradient_boosting",
+      "target": "metric_auc_roc",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.6,
+      "source_file": "reports/generated/model_comparison_heart.png",
+      "source_location": null,
+      "weight": 0.92
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "heart_model_comparison_across_metrics",
+      "label": "Heart Model Comparison Across Metrics",
+      "nodes": [
+        "session_validatetoken",
+        "task_heart_disease_risk_prediction",
+        "model_xgboost",
+        "model_logistic_regression",
+        "model_random_forest",
+        "model_gradient_boosting",
+        "metric_accuracy",
+        "metric_precision",
+        "metric_recall",
+        "metric_f1_score",
+        "metric_auc_roc"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reports/generated/model_comparison_heart.png"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

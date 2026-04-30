@@ -1,0 +1,209 @@
+{
+  "nodes": [
+    {
+      "id": "anomaly_scatter_diabetes_chart",
+      "label": "Anomaly Detection (IsolationForest + PCA projection) scatter plot for diabetes",
+      "file_type": "image",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_anomaly_detection",
+      "label": "Anomaly detection visualization",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_isolation_forest",
+      "label": "IsolationForest anomaly detector",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_pca_projection",
+      "label": "PCA projection (dimensionality reduction for plotting)",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_pc1",
+      "label": "Principal Component 1 (PC1)",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_pc2",
+      "label": "Principal Component 2 (PC2)",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_diabetes_dataset",
+      "label": "Diabetes dataset (source for plotted samples)",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_normal_points",
+      "label": "Normal (inlier) samples (blue points)",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_anomaly_points",
+      "label": "Anomalous (outlier) samples (red points)",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "anomaly_scatter_diabetes_high_pc1_outliers",
+      "label": "Outliers concentrated at high PC1 values (approximately 60k–82k)",
+      "file_type": "document",
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "anomaly_scatter_diabetes_chart",
+      "target": "anomaly_scatter_diabetes_anomaly_detection",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "anomaly_scatter_diabetes_chart",
+      "target": "anomaly_scatter_diabetes_isolation_forest",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "anomaly_scatter_diabetes_chart",
+      "target": "anomaly_scatter_diabetes_pca_projection",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "anomaly_scatter_diabetes_chart",
+      "target": "anomaly_scatter_diabetes_pc1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "anomaly_scatter_diabetes_chart",
+      "target": "anomaly_scatter_diabetes_pc2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "anomaly_scatter_diabetes_chart",
+      "target": "anomaly_scatter_diabetes_diabetes_dataset",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "anomaly_scatter_diabetes_chart",
+      "target": "anomaly_scatter_diabetes_normal_points",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "anomaly_scatter_diabetes_chart",
+      "target": "anomaly_scatter_diabetes_anomaly_points",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "anomaly_scatter_diabetes_anomaly_points",
+      "target": "anomaly_scatter_diabetes_high_pc1_outliers",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/anomaly_scatter_diabetes.png",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

@@ -1,0 +1,360 @@
+{
+  "nodes": [
+    {
+      "id": "roc_curves_heart_png",
+      "label": "ROC Curves (Heart Models)",
+      "file_type": "image",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_roc_curve",
+      "label": "ROC Curve",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_auc",
+      "label": "AUC (Area Under the ROC Curve)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept_random_classifier_baseline",
+      "label": "Random Classifier Baseline (Diagonal)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_logistic_regression_heart",
+      "label": "LogisticRegression (Heart)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_random_forest_heart",
+      "label": "RandomForest (Heart)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_gradient_boosting_heart",
+      "label": "GradientBoosting (Heart)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_xgboost_heart",
+      "label": "XGBoost (Heart)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "auc_logistic_regression_heart_0_931",
+      "label": "AUC=0.931 (LogisticRegression, Heart)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "auc_random_forest_heart_0_927",
+      "label": "AUC=0.927 (RandomForest, Heart)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "auc_gradient_boosting_heart_0_922",
+      "label": "AUC=0.922 (GradientBoosting, Heart)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "auc_xgboost_heart_0_938",
+      "label": "AUC=0.938 (XGBoost, Heart)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "finding_xgboost_highest_auc_heart",
+      "label": "Finding: XGBoost has the highest AUC among compared heart models (0.938)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "finding_all_models_high_auc_heart",
+      "label": "Finding: All compared heart models show high discrimination (AUC ≈ 0.92–0.94)",
+      "file_type": "document",
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "roc_curves_heart_png",
+      "target": "concept_roc_curve",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "concept_auc",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "concept_random_classifier_baseline",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "model_logistic_regression_heart",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "model_random_forest_heart",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "model_gradient_boosting_heart",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "model_xgboost_heart",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "auc_logistic_regression_heart_0_931",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.98,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "auc_random_forest_heart_0_927",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.98,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "auc_gradient_boosting_heart_0_922",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.98,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "roc_curves_heart_png",
+      "target": "auc_xgboost_heart_0_938",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.98,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "model_logistic_regression_heart",
+      "target": "auc_logistic_regression_heart_0_931",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "model_random_forest_heart",
+      "target": "auc_random_forest_heart_0_927",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "model_gradient_boosting_heart",
+      "target": "auc_gradient_boosting_heart_0_922",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "model_xgboost_heart",
+      "target": "auc_xgboost_heart_0_938",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "finding_xgboost_highest_auc_heart",
+      "target": "model_xgboost_heart",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "finding_xgboost_highest_auc_heart",
+      "target": "auc_xgboost_heart_0_938",
+      "relation": "cites",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "finding_all_models_high_auc_heart",
+      "target": "concept_auc",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reports/generated/roc_curves_heart.png",
+      "source_location": null,
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "heart_roc_comparison_models",
+      "label": "Heart ROC Comparison Across Models",
+      "nodes": [
+        "model_logistic_regression_heart",
+        "model_random_forest_heart",
+        "model_gradient_boosting_heart",
+        "model_xgboost_heart",
+        "concept_roc_curve",
+        "concept_auc"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reports/generated/roc_curves_heart.png"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

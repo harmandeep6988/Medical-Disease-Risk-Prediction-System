@@ -1,0 +1,388 @@
+{
+  "nodes": [
+    {
+      "id": "best_model_confusion_matrix_heart",
+      "label": "Confusion Matrix — Best Model (Heart)",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__title_confusion_matrix_best_model",
+      "label": "Title: Confusion Matrix - Best Model",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__axis_actual",
+      "label": "Axis label: Actual",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__axis_predicted",
+      "label": "Axis label: Predicted",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__class_label_0",
+      "label": "Class label: 0",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__class_label_1",
+      "label": "Class label: 1",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__cell_actual_0_predicted_0_count_29",
+      "label": "Cell: Actual 0, Predicted 0 = 29",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__cell_actual_0_predicted_1_count_3",
+      "label": "Cell: Actual 0, Predicted 1 = 3",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__cell_actual_1_predicted_0_count_4",
+      "label": "Cell: Actual 1, Predicted 0 = 4",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__cell_actual_1_predicted_1_count_24",
+      "label": "Cell: Actual 1, Predicted 1 = 24",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__correct_predictions_diagonal",
+      "label": "Correct predictions: diagonal cells where Actual = Predicted",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_confusion_matrix_heart__misclassifications_off_diagonal",
+      "label": "Misclassifications: off-diagonal cells where Actual ≠ Predicted",
+      "file_type": "image",
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__title_confusion_matrix_best_model",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__axis_actual",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__axis_predicted",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__axis_actual",
+      "target": "best_model_confusion_matrix_heart__class_label_0",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__axis_actual",
+      "target": "best_model_confusion_matrix_heart__class_label_1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__axis_predicted",
+      "target": "best_model_confusion_matrix_heart__class_label_0",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__axis_predicted",
+      "target": "best_model_confusion_matrix_heart__class_label_1",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__cell_actual_0_predicted_0_count_29",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__cell_actual_0_predicted_1_count_3",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__cell_actual_1_predicted_0_count_4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__cell_actual_1_predicted_1_count_24",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__cell_actual_0_predicted_0_count_29",
+      "target": "best_model_confusion_matrix_heart__class_label_0",
+      "relation": "has_actual_label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__cell_actual_0_predicted_0_count_29",
+      "target": "best_model_confusion_matrix_heart__class_label_0",
+      "relation": "has_predicted_label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__cell_actual_0_predicted_1_count_3",
+      "target": "best_model_confusion_matrix_heart__class_label_0",
+      "relation": "has_actual_label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__cell_actual_0_predicted_1_count_3",
+      "target": "best_model_confusion_matrix_heart__class_label_1",
+      "relation": "has_predicted_label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__cell_actual_1_predicted_0_count_4",
+      "target": "best_model_confusion_matrix_heart__class_label_1",
+      "relation": "has_actual_label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__cell_actual_1_predicted_0_count_4",
+      "target": "best_model_confusion_matrix_heart__class_label_0",
+      "relation": "has_predicted_label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__cell_actual_1_predicted_1_count_24",
+      "target": "best_model_confusion_matrix_heart__class_label_1",
+      "relation": "has_actual_label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__cell_actual_1_predicted_1_count_24",
+      "target": "best_model_confusion_matrix_heart__class_label_1",
+      "relation": "has_predicted_label",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__correct_predictions_diagonal",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart",
+      "target": "best_model_confusion_matrix_heart__misclassifications_off_diagonal",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__correct_predictions_diagonal",
+      "target": "best_model_confusion_matrix_heart__cell_actual_0_predicted_0_count_29",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__correct_predictions_diagonal",
+      "target": "best_model_confusion_matrix_heart__cell_actual_1_predicted_1_count_24",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__misclassifications_off_diagonal",
+      "target": "best_model_confusion_matrix_heart__cell_actual_0_predicted_1_count_3",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    },
+    {
+      "source": "best_model_confusion_matrix_heart__misclassifications_off_diagonal",
+      "target": "best_model_confusion_matrix_heart__cell_actual_1_predicted_0_count_4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reports/generated/best_model_confusion_matrix_heart.png",
+      "source_location": null,
+      "weight": 1
+    }
+  ]
+}
