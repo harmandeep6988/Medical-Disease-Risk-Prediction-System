@@ -25,6 +25,7 @@
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/docker/DOCKER_ARCHITECTURE.md
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/docker/DOCKER_GUIDE.md
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/diabetes_patient_report_20260428_223857.pdf
+/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/diabetes_self_assessment_20260430_214108.pdf
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/heart_patient_report_20260428_223859.pdf
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/best_model_confusion_matrix_diabetes.png
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/roc_curves_diabetes.png
@@ -36,6 +37,7 @@
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/model_comparison_heart.png
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/roc_curves_heart.png
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/model_comparison_diabetes.png
+/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/anomaly_scatter.png
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/anomaly_scatter_heart.png
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/anomaly_scatter_diabetes.png
 /home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/shap_waterfall_patient_diabetes.png

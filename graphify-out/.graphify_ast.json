@@ -82,70 +82,147 @@
       "label": "_risk_color()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L61"
+      "source_location": "L62"
     },
     {
       "id": "dashboard_app_risk_label",
       "label": "_risk_label()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L69"
+      "source_location": "L70"
     },
     {
       "id": "dashboard_app_gauge",
       "label": "_gauge()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L77"
+      "source_location": "L78"
     },
     {
       "id": "dashboard_app_load_disease_assets",
       "label": "_load_disease_assets()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L100"
+      "source_location": "L101"
     },
     {
       "id": "dashboard_app_coerce_numeric",
       "label": "_coerce_numeric()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L115"
+      "source_location": "L116"
     },
     {
       "id": "dashboard_app_fit_reference_transform",
       "label": "_fit_reference_transform()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L122"
+      "source_location": "L123"
     },
     {
       "id": "dashboard_app_transform_raw_to_model_features",
       "label": "_transform_raw_to_model_features()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L162"
+      "source_location": "L163"
     },
     {
       "id": "dashboard_app_transform_dataset_to_model_features",
       "label": "_transform_dataset_to_model_features()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L190"
+      "source_location": "L191"
     },
     {
       "id": "dashboard_app_build_patient_input",
       "label": "_build_patient_input()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L221"
+      "source_location": "L222"
     },
     {
       "id": "dashboard_app_list_comparison_models",
       "label": "_list_comparison_models()",
       "file_type": "code",
       "source_file": "dashboard/app.py",
-      "source_location": "L280"
+      "source_location": "L281"
+    },
+    {
+      "id": "dashboard_app_assessment_risk_band",
+      "label": "_assessment_risk_band()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L297"
+    },
+    {
+      "id": "dashboard_app_assessment_risk_color",
+      "label": "_assessment_risk_color()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L305"
+    },
+    {
+      "id": "dashboard_app_assessment_gauge",
+      "label": "_assessment_gauge()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L313"
+    },
+    {
+      "id": "dashboard_app_assessment_card",
+      "label": "_assessment_card()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L338"
+    },
+    {
+      "id": "dashboard_app_feature_label",
+      "label": "_feature_label()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L364"
+    },
+    {
+      "id": "dashboard_app_plain_shap_sentence",
+      "label": "_plain_shap_sentence()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L428"
+    },
+    {
+      "id": "dashboard_app_load_assessment_context",
+      "label": "_load_assessment_context()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L435"
+    },
+    {
+      "id": "dashboard_app_build_assessment_result",
+      "label": "_build_assessment_result()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L472"
+    },
+    {
+      "id": "dashboard_app_render_assessment_result",
+      "label": "_render_assessment_result()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L513"
+    },
+    {
+      "id": "dashboard_app_render_diabetes_self_assessment",
+      "label": "_render_diabetes_self_assessment()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L539"
+    },
+    {
+      "id": "dashboard_app_render_heart_self_assessment",
+      "label": "_render_heart_self_assessment()",
+      "file_type": "code",
+      "source_file": "dashboard/app.py",
+      "source_location": "L644"
     },
     {
       "id": "src_feature_engineering_py",
@@ -1103,11 +1180,20 @@
     },
     {
       "source": "dashboard_app_py",
+      "target": "report_generator",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
       "target": "dashboard_app_risk_color",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L61",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -1116,7 +1202,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L69",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
@@ -1125,7 +1211,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L77",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -1134,7 +1220,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L100",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -1143,7 +1229,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L115",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -1152,7 +1238,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L122",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -1161,7 +1247,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L162",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -1170,7 +1256,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L190",
+      "source_location": "L191",
       "weight": 1.0
     },
     {
@@ -1179,7 +1265,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L221",
+      "source_location": "L222",
       "weight": 1.0
     },
     {
@@ -1188,7 +1274,106 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L280",
+      "source_location": "L281",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_assessment_risk_band",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L297",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_assessment_risk_color",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L305",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_assessment_gauge",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L313",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_assessment_card",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L338",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_feature_label",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L364",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_plain_shap_sentence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L428",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_load_assessment_context",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L435",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_build_assessment_result",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L472",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_render_assessment_result",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L513",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_render_diabetes_self_assessment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L539",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_py",
+      "target": "dashboard_app_render_heart_self_assessment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L644",
       "weight": 1.0
     },
     {
@@ -1197,7 +1382,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L78",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -1206,7 +1391,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L129",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -1215,7 +1400,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L169",
+      "source_location": "L170",
       "weight": 1.0
     },
     {
@@ -1224,7 +1409,151 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "dashboard/app.py",
-      "source_location": "L198",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_assessment_gauge",
+      "target": "dashboard_app_assessment_risk_color",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L314",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_assessment_gauge",
+      "target": "dashboard_app_assessment_risk_band",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L315",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_plain_shap_sentence",
+      "target": "dashboard_app_feature_label",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L429",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_load_assessment_context",
+      "target": "dashboard_app_load_disease_assets",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L436",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_load_assessment_context",
+      "target": "dashboard_app_fit_reference_transform",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L450",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_load_assessment_context",
+      "target": "dashboard_app_transform_dataset_to_model_features",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L452",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_build_assessment_result",
+      "target": "dashboard_app_load_assessment_context",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L473",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_build_assessment_result",
+      "target": "dashboard_app_transform_raw_to_model_features",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L478",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_build_assessment_result",
+      "target": "dashboard_app_plain_shap_sentence",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L495",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_build_assessment_result",
+      "target": "dashboard_app_assessment_risk_band",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L507",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_render_assessment_result",
+      "target": "dashboard_app_assessment_gauge",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L514",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_render_assessment_result",
+      "target": "dashboard_app_assessment_card",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L518",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_render_diabetes_self_assessment",
+      "target": "dashboard_app_build_assessment_result",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L633",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_render_diabetes_self_assessment",
+      "target": "dashboard_app_render_assessment_result",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L641",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_render_heart_self_assessment",
+      "target": "dashboard_app_build_assessment_result",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L743",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_render_heart_self_assessment",
+      "target": "dashboard_app_render_assessment_result",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "dashboard/app.py",
+      "source_location": "L751",
       "weight": 1.0
     },
     {
@@ -3220,27 +3549,27 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "dashboard/app.py",
-      "source_location": "L130",
-      "weight": 1.0
-    },
-    {
-      "source": "dashboard_app_fit_reference_transform",
-      "target": "src_data_preprocessing_handle_missing_values",
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "dashboard/app.py",
       "source_location": "L131",
       "weight": 1.0
     },
     {
       "source": "dashboard_app_fit_reference_transform",
+      "target": "src_data_preprocessing_handle_missing_values",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "dashboard/app.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_fit_reference_transform",
       "target": "src_feature_engineering_build_feature_matrix",
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "dashboard/app.py",
-      "source_location": "L148",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -3250,7 +3579,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "dashboard/app.py",
-      "source_location": "L170",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -3260,7 +3589,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "dashboard/app.py",
-      "source_location": "L177",
+      "source_location": "L178",
       "weight": 1.0
     },
     {
@@ -3270,22 +3599,12 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "dashboard/app.py",
-      "source_location": "L186",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
       "source": "dashboard_app_transform_dataset_to_model_features",
       "target": "src_data_preprocessing_replace_zero_with_nan",
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "dashboard/app.py",
-      "source_location": "L199",
-      "weight": 1.0
-    },
-    {
-      "source": "dashboard_app_transform_dataset_to_model_features",
-      "target": "src_data_preprocessing_handle_missing_values",
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
@@ -3295,12 +3614,42 @@
     },
     {
       "source": "dashboard_app_transform_dataset_to_model_features",
+      "target": "src_data_preprocessing_handle_missing_values",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "dashboard/app.py",
+      "source_location": "L201",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_transform_dataset_to_model_features",
       "target": "src_feature_engineering_build_feature_matrix",
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "dashboard/app.py",
-      "source_location": "L215",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_build_assessment_result",
+      "target": "src_explainability_compute_shap_values",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "dashboard/app.py",
+      "source_location": "L487",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard_app_build_assessment_result",
+      "target": "src_report_generator_generate_patient_report",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "dashboard/app.py",
+      "source_location": "L497",
       "weight": 1.0
     },
     {

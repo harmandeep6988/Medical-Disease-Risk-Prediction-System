@@ -302,6 +302,42 @@ def _assessment_risk_band(prob: float) -> str:
     return "High"
 
 
+def _show_assessment_help() -> None:
+    """Display help expander explaining results in plain language."""
+    with st.expander("📚 How to Read Your Results", expanded=False):
+        st.markdown("""
+        ### Understanding Your Results
+
+        **What is the Risk Score?**
+        
+        This is a percentage that estimates how likely you are to develop this disease based on the information you provided.
+        - A score of **20%** means out of 100 people with your profile, roughly 20 might develop this disease
+        - A score of **60%** means the prediction is less certain but leans toward higher risk
+        
+        **Risk Levels Explained:**
+        
+        🟢 **Low Risk** (below 40%): Your characteristics suggest lower risk right now. Keep up healthy habits!
+        
+        🟡 **Moderate Risk** (40-70%): Your factors suggest moderate risk. It's a good time to talk with your doctor about prevention.
+        
+        🔴 **High Risk** (above 70%): Your characteristics suggest higher risk. Please schedule a check-up with your doctor to discuss.
+        
+        **What are SHAP Factors?**
+        
+        These are the top factors that influenced the prediction, listed in order of importance:
+        - **Increases risk**: Factors that pushed the prediction toward higher risk
+        - **Decreases risk**: Factors that pushed the prediction toward lower risk
+        
+        For example, if you see "Glucose Level increases risk" with a high impact, that means high glucose was an important reason for the prediction.
+        
+        **Important Notes:**
+        - This tool is educational and uses medical data patterns
+        - It is NOT a diagnosis—only a doctor can diagnose
+        - Your actual risk depends on many factors not captured here
+        - Always consult with a healthcare professional for medical decisions
+        """)
+
+
 def _assessment_risk_color(prob: float) -> str:
     if prob < 0.4:
         return "#2E8B57"
@@ -540,6 +576,9 @@ def _render_diabetes_self_assessment() -> None:
     st.subheader("Diabetes")
     st.info("These questions use everyday language. If you know your recent clinic numbers, enter those values; if not, use your best estimate.")
 
+    # Show validation warnings container
+    warnings_container = st.container()
+
     with st.form("diabetes_self_assessment_form"):
         left, right = st.columns(2)
 
@@ -619,7 +658,21 @@ def _render_diabetes_self_assessment() -> None:
 
         submitted = st.form_submit_button("Check My Diabetes Risk")
 
+    # Show validation warnings outside the form
     if submitted:
+        validation_issues = []
+        if glucose == 0:
+            validation_issues.append("• Blood glucose of 0 mg/dL seems medically unlikely. Please double-check your value.")
+        if bmi == 0:
+            validation_issues.append("• BMI of 0 seems medically unlikely. Please double-check your value.")
+
+        if validation_issues:
+            with warnings_container:
+                st.warning(
+                    "⚠️ **Data Alert**\n\n" + "\n".join(validation_issues) +
+                    "\n\nWe still processed your submission, but please review these values."
+                )
+
         raw_patient = {
             "Pregnancies": int(pregnancies),
             "Glucose": float(glucose),
@@ -644,6 +697,9 @@ def _render_diabetes_self_assessment() -> None:
 def _render_heart_self_assessment() -> None:
     st.subheader("Heart Disease")
     st.info("These questions ask about common heart-health measurements. If you do not know a value, use your latest clinic result or ask your clinician.")
+
+    # Show validation warnings container
+    warnings_container = st.container()
 
     with st.form("heart_self_assessment_form"):
         left, right = st.columns(2)
@@ -724,7 +780,19 @@ def _render_heart_self_assessment() -> None:
 
         submitted = st.form_submit_button("Check My Heart Disease Risk")
 
+    # Show validation warnings outside the form
     if submitted:
+        validation_issues = []
+        if chol == 0:
+            validation_issues.append("• Cholesterol of 0 mg/dL seems medically unlikely. Please double-check your value.")
+
+        if validation_issues:
+            with warnings_container:
+                st.warning(
+                    "⚠️ **Data Alert**\n\n" + "\n".join(validation_issues) +
+                    "\n\nWe still processed your submission, but please review these values."
+                )
+
         raw_patient = {
             "age": float(age),
             "sex": 0 if sex_label == "Female" else 1,
@@ -901,6 +969,7 @@ with anomaly_tab:
 
 with self_tab:
     st.subheader("Patient Self-Assessment")
+    _show_assessment_help()
     diabetes_tab, heart_tab = st.tabs(["Diabetes", "Heart Disease"])
 
     with diabetes_tab:
