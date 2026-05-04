@@ -106,11 +106,11 @@ def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> N
 
 
 def main() -> None:
-    diabetes_path = ROOT / "data" / "processed" / "diabetes_processed.csv"
-    heart_path = ROOT / "data" / "processed" / "heart_processed.csv"
+    diabetes_path = ROOT / "data" / "raw" / "diabetes_merged.csv"
+    heart_path = ROOT / "data" / "raw" / "heart_merged.csv"
 
     if not diabetes_path.exists() or not heart_path.exists():
-        raise FileNotFoundError("Processed datasets missing. Run scripts/prepare_datasets.py first.")
+        raise FileNotFoundError("Merged datasets missing. Run scripts/fetch_and_merge_datasets.py first.")
 
     run_pipeline(diabetes_path, target_column="Outcome", model_prefix="diabetes")
     run_pipeline(heart_path, target_column="target", model_prefix="heart")

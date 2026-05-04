@@ -76,6 +76,7 @@ Predicts risk for heart disease, diabetes, and liver disease using ML.
 
 ```bash
 pip install -r requirements.txt
+python scripts/fetch_and_merge_datasets.py
 streamlit run dashboard/app.py
 ```
 
@@ -117,7 +118,7 @@ docker compose up dashboard
 
 **Terminal 1:**
 ```bash
-bash scripts/launch_dashboard.py
+bash scripts/run_all.py --no-dashboard
 ```
 
 **Terminal 2:**
@@ -152,6 +153,7 @@ Medical-Disease-Risk-Prediction-System/
 ├── reports/
 │   └── generated/                # PDF reports (auto-generated)
 ├── scripts/
+│   ├── fetch_and_merge_datasets.py # Merge OpenML/Kaggle/local sources
 │   ├── launch_api.sh             # Start FastAPI server
 │   ├── launch_dashboard.py       # Start Streamlit dashboard
 │   ├── train_and_evaluate.py     # Model training pipeline
@@ -186,7 +188,7 @@ Medical-Disease-Risk-Prediction-System/
 - **Apps & APIs**: Streamlit, FastAPI
 - **Containerization**: Docker, Docker Compose
 - **CI/CD**: GitHub Actions
-- **Data Source**: Kaggle API
+- **Data Source**: Kaggle API, OpenML
 
 ## Key ML Concepts
 
