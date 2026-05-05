@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "disease": "diabetes",
+      "train_auc": 0.8676083422998558,
+      "test_auc": 0.8708272859216255,
+      "cv_auc_mean": 0.8563243183452244,
+      "cv_auc_std": 0.03784134553075221,
+      "gap": -0.0032189436217696654,
+      "overfitting": false,
+      "status": "\u2713 No Overfitting",
+      "plot": "/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/overfitting_analysis_diabetes.png"
+    },
+    {
+      "disease": "heart",
+      "train_auc": 0.9548313093498905,
+      "test_auc": 0.9089750127485977,
+      "cv_auc_mean": 0.8482615148903572,
+      "cv_auc_std": 0.022331374701321047,
+      "gap": 0.045856296601292756,
+      "overfitting": false,
+      "status": "\u2713 No Overfitting",
+      "plot": "/home/blaze/important/project.ml/Medical-Disease-Risk-Prediction-System/reports/generated/overfitting_analysis_heart.png"
+    }
+  ]
+}

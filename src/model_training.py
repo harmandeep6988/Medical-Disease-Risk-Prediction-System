@@ -33,16 +33,19 @@ def get_model_grids(random_state: int = 42) -> dict[str, tuple[Any, dict[str, li
             RandomForestClassifier(random_state=random_state),
             {
                 "n_estimators": [100, 200],
-                "max_depth": [None, 5, 10],
-                "min_samples_split": [2, 5],
+                "max_depth": [3, 5, 8],
+                "min_samples_split": [2, 5, 10],
+                "min_samples_leaf": [1, 2, 4],
+                "max_features": ["sqrt", "log2"],
             },
         ),
         "GradientBoosting": (
             GradientBoostingClassifier(random_state=random_state),
             {
                 "n_estimators": [100, 200],
-                "learning_rate": [0.05, 0.1],
+                "learning_rate": [0.03, 0.05],
                 "max_depth": [2, 3],
+                "min_samples_leaf": [1, 2, 4],
             },
         ),
         "XGBoost": (
@@ -52,9 +55,13 @@ def get_model_grids(random_state: int = 42) -> dict[str, tuple[Any, dict[str, li
             ),
             {
                 "n_estimators": [100, 200],
-                "max_depth": [3, 5],
-                "learning_rate": [0.05, 0.1],
-                "subsample": [0.8, 1.0],
+                "max_depth": [3, 4],
+                "learning_rate": [0.03, 0.05],
+                "subsample": [0.7, 0.9],
+                "colsample_bytree": [0.7, 0.9],
+                "min_child_weight": [1, 5],
+                "reg_lambda": [1.0, 5.0],
+                "gamma": [0, 0.1],
             },
         ),
     }

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 from typing import Mapping
@@ -9,10 +10,14 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
+SCRIPTS = ROOT / "scripts"
 if str(SRC) not in sys.path:
     sys.path.append(str(SRC))
+if str(SCRIPTS) not in sys.path:
+    sys.path.append(str(SCRIPTS))
 
 from data_preprocessing import preprocess_data
+from detect_overfitting import analyze_overfitting_from_features
 from explainability import explain_model_predictions
 from feature_engineering import HEART_CATEGORICAL_COLUMNS, engineer_features, transform_features_for_inference
 from model_evaluation import evaluate_and_visualize
@@ -35,7 +40,12 @@ def _rename_artifacts(model_prefix: str, files: Mapping[str, Path]) -> dict[str,
     return out
 
 
-def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> None:
+def run_pipeline(
+    dataset_path: Path,
+    target_column: str,
+    model_prefix: str,
+    run_overfitting: bool = True,
+) -> dict[str, object]:
     print(f"Running pipeline for: {dataset_path.name}")
 
     source_columns = list(pd.read_csv(dataset_path, nrows=2).columns)
@@ -95,6 +105,22 @@ def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> N
         out_dir / f"best_{model_prefix}_meta.joblib",
     )
 
+    overfit_result: dict[str, object] | None = None
+    if run_overfitting:
+        overfit_result = analyze_overfitting_from_features(
+            disease=model_prefix,
+            model=best_model,
+            X_train=X_train_eng,
+            y_train=y_train,
+            X_test=X_test_eng,
+            y_test=y_test,
+        )
+
+    best_row = eval_summary.loc[eval_summary["model"] == best_model_name].iloc[0]
+    best_auc = float(best_row["auc_roc"])
+    best_accuracy = float(best_row["accuracy"])
+    record_count = len(pd.read_csv(dataset_path))
+
     print("CV Summary:")
     print(cv_summary)
     print("Evaluation Summary:")
@@ -104,16 +130,72 @@ def run_pipeline(dataset_path: Path, target_column: str, model_prefix: str) -> N
     print(f"Evaluation artifact files: {artifacts}")
     print(f"SHAP artifact files: {shap_files}")
 
+    return {
+        "model_prefix": model_prefix,
+        "best_model": best_model_name,
+        "best_auc": best_auc,
+        "best_accuracy": best_accuracy,
+        "records": record_count,
+        "overfitting": overfit_result,
+    }
+
 
 def main() -> None:
-    diabetes_path = ROOT / "data" / "raw" / "diabetes_merged.csv"
-    heart_path = ROOT / "data" / "raw" / "heart_merged.csv"
+    parser = argparse.ArgumentParser(description="Train and evaluate disease risk models.")
+    parser.add_argument("--skip-overfitting", action="store_true", help="Skip overfitting analysis step.")
+    args = parser.parse_args()
+
+    diabetes_path = ROOT / "data" / "raw" / "diabetes_kaggle.csv"
+    heart_path = ROOT / "data" / "raw" / "heart_kaggle.csv"
 
     if not diabetes_path.exists() or not heart_path.exists():
-        raise FileNotFoundError("Merged datasets missing. Run scripts/fetch_and_merge_datasets.py first.")
+        fallback_diabetes = ROOT / "data" / "raw" / "diabetes.csv"
+        fallback_heart = ROOT / "data" / "raw" / "heart.csv"
+        if fallback_diabetes.exists() and fallback_heart.exists():
+            print("Kaggle datasets missing. Falling back to raw datasets in data/raw.")
+            diabetes_path = fallback_diabetes
+            heart_path = fallback_heart
+        else:
+            raise FileNotFoundError(
+                "Kaggle datasets missing. Provide data/raw/diabetes_kaggle.csv and data/raw/heart_kaggle.csv or raw fallbacks."
+            )
 
-    run_pipeline(diabetes_path, target_column="Outcome", model_prefix="diabetes")
-    run_pipeline(heart_path, target_column="target", model_prefix="heart")
+    diabetes_result = run_pipeline(
+        diabetes_path,
+        target_column="Outcome",
+        model_prefix="diabetes",
+        run_overfitting=not args.skip_overfitting,
+    )
+    heart_result = run_pipeline(
+        heart_path,
+        target_column="target",
+        model_prefix="heart",
+        run_overfitting=not args.skip_overfitting,
+    )
+
+    rows = []
+    for result in [diabetes_result, heart_result]:
+        overfit = result.get("overfitting") or {}
+        train_auc = overfit.get("train_auc")
+        test_auc = overfit.get("test_auc")
+        status = overfit.get("status", "n/a")
+        rows.append(
+            {
+                "Dataset": result["model_prefix"].title(),
+                "Records": result["records"],
+                "AUC": result["best_auc"],
+                "Accuracy": result["best_accuracy"],
+                "Status": "✓" if status != "n/a" else "n/a",
+            }
+        )
+
+    summary = pd.DataFrame(rows)
+    print("\nKaggle Training Summary:")
+    print(summary.to_string(index=False))
+
+    print("\nPrevious baseline (before Kaggle):")
+    print("- Diabetes: 768 records, AUC 0.826, Accuracy 76%")
+    print("- Heart: 297 records (baseline metrics may differ by run)")
 
 
 if __name__ == "__main__":

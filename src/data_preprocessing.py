@@ -89,8 +89,14 @@ def scale_features(
         X_train_scaled = mm_scaler.fit_transform(X_train_std)
         X_test_scaled = mm_scaler.transform(X_test_std)
 
-        train_df.loc[:, scaled_cols] = X_train_scaled
-        test_df.loc[:, scaled_cols] = X_test_scaled
+        train_scaled_df = pd.DataFrame(X_train_scaled, columns=scaled_cols, index=train_df.index)
+        test_scaled_df = pd.DataFrame(X_test_scaled, columns=scaled_cols, index=test_df.index)
+
+        train_df = train_df.astype({col: float for col in scaled_cols})
+        test_df = test_df.astype({col: float for col in scaled_cols})
+
+        train_df[scaled_cols] = train_scaled_df
+        test_df[scaled_cols] = test_scaled_df
 
     artifacts = PreprocessingArtifacts(
         standard_scaler=std_scaler,
@@ -133,7 +139,19 @@ def split_and_balance(
 
     X_train_resampled = pd.DataFrame(X_train_resampled, columns=X.columns)
     for col in categorical_columns:
-        X_train_resampled[col] = pd.to_numeric(X_train_resampled[col], errors="coerce").round().astype(int)
+        fill_value = None
+        if col in X_train.columns:
+            series = pd.to_numeric(X_train[col], errors="coerce")
+            if not series.dropna().empty:
+                fill_value = series.mode().iloc[0]
+        if fill_value is None:
+            fill_value = 0
+        X_train_resampled[col] = (
+            pd.to_numeric(X_train_resampled[col], errors="coerce")
+            .fillna(fill_value)
+            .round()
+            .astype(int)
+        )
 
     y_train_resampled = pd.Series(y_train_resampled, name=target_column)
 

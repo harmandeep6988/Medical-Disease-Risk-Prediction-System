@@ -575,6 +575,22 @@ def _render_assessment_result(disease: str, result: dict[str, Any]) -> None:
 def _render_diabetes_self_assessment() -> None:
     st.subheader("Diabetes")
     st.info("These questions use everyday language. If you know your recent clinic numbers, enter those values; if not, use your best estimate.")
+    with st.expander("Help guide: what each input means"):
+        st.markdown(
+            """
+            | Input | What it means | Normal / Typical |
+            | --- | --- | --- |
+            | Age | your age in years | varies by person |
+            | Biological sex | used only to decide whether the pregnancy question applies | n/a |
+            | Pregnancies | how many times you have been pregnant | 0 if never pregnant |
+            | Fasting blood sugar | glucose after fasting for several hours | 70-99 mg/dL |
+            | BMI | body mass index from height and weight | 18.5-24.9 |
+            | Blood pressure | diastolic pressure at rest (bottom number) | 60-80 mm Hg |
+            | Skin fold thickness | fat layer under the skin measured in clinic | 10-50 mm (varies) |
+            | Insulin | fasting insulin level from a blood test | 2-25 uU/mL |
+            | Family history of diabetes | simple proxy for genetic risk | no family history |
+            """
+        )
 
     # Show validation warnings container
     warnings_container = st.container()
@@ -583,11 +599,19 @@ def _render_diabetes_self_assessment() -> None:
         left, right = st.columns(2)
 
         with left:
-            age = st.number_input("How old are you?", min_value=1, max_value=100, value=40, step=1, help="Age in years.")
+            age = st.number_input(
+                "How old are you?",
+                min_value=1,
+                max_value=100,
+                value=40,
+                step=1,
+                help="Age in years. No single normal range.",
+            )
+            st.caption("Normal: age varies (no single normal range).")
             sex = st.selectbox(
                 "What is your biological sex?",
                 ["Female", "Male"],
-                help="This is only used to decide whether the pregnancy question applies.",
+                help="Used only to decide whether the pregnancy question applies.",
             )
             pregnancies = 0
             if sex == "Female":
@@ -597,24 +621,27 @@ def _render_diabetes_self_assessment() -> None:
                     max_value=20,
                     value=0,
                     step=1,
-                    help="Use 0 if you have never been pregnant.",
+                    help="Use 0 if you have never been pregnant. Normal: 0 if never pregnant.",
                 )
+                st.caption("Normal: 0 if never pregnant.")
             glucose = st.number_input(
                 "What was your last fasting blood sugar reading? (mg/dL)",
                 min_value=70,
                 max_value=200,
                 value=100,
                 step=1,
-                help="This is your blood sugar after not eating for several hours.",
+                help="Blood sugar after not eating for several hours. Normal: 70-99 mg/dL.",
             )
+            st.caption("Normal fasting: 70-99 mg/dL.")
             bmi = st.number_input(
                 "What is your BMI?",
                 min_value=10.0,
                 max_value=70.0,
                 value=25.0,
                 step=0.1,
-                help="BMI is a weight-to-height ratio used to estimate body fat.",
+                help="BMI is a weight-to-height ratio used to estimate body fat. Normal: 18.5-24.9.",
             )
+            st.caption("Normal: 18.5-24.9.")
             with st.expander("BMI helper: calculate BMI from weight and height"):
                 bmi_helper_cols = st.columns(2)
                 with bmi_helper_cols[0]:
@@ -632,29 +659,33 @@ def _render_diabetes_self_assessment() -> None:
                 max_value=140,
                 value=80,
                 step=1,
-                help="This is the pressure inside your arteries when your heart pumps.",
+                help="Diastolic pressure inside your arteries at rest. Normal: 60-80 mm Hg.",
             )
+            st.caption("Normal diastolic: 60-80 mm Hg.")
             skin_thickness = st.number_input(
                 "What is your skin fold thickness? (mm) — ask your doctor",
                 min_value=0,
                 max_value=100,
                 value=20,
                 step=1,
-                help="A measurement of the fat layer under the skin, usually taken in clinic.",
+                help="Fat layer under the skin, usually measured at a clinic. Typical: 10-50 mm (varies).",
             )
+            st.caption("Typical: 10-50 mm (varies).")
             insulin = st.number_input(
                 "What is your insulin level? (mu U/ml)",
                 min_value=0,
                 max_value=900,
                 value=80,
                 step=1,
-                help="Insulin is the hormone that helps move sugar from blood into cells.",
+                help="Insulin helps move sugar from blood into cells. Typical fasting: 2-25 uU/mL.",
             )
+            st.caption("Typical fasting: 2-25 uU/mL.")
             diabetes_history = st.selectbox(
                 "Do you have a family history of diabetes?",
                 ["No", "Somewhat", "Yes"],
-                help="This maps to a simple risk score used by the model.",
+                help="This maps to a simple risk score used by the model. No normal range.",
             )
+            st.caption("Normal: No family history.")
 
         submitted = st.form_submit_button("Check My Diabetes Risk")
 
@@ -697,6 +728,26 @@ def _render_diabetes_self_assessment() -> None:
 def _render_heart_self_assessment() -> None:
     st.subheader("Heart Disease")
     st.info("These questions ask about common heart-health measurements. If you do not know a value, use your latest clinic result or ask your clinician.")
+    with st.expander("Help guide: what each input means"):
+        st.markdown(
+            """
+            | Input | What it means | Normal / Typical |
+            | --- | --- | --- |
+            | Age | your age in years | varies by person |
+            | Biological sex | male or female, coded by the model | n/a |
+            | Chest pain type | whether you have chest pain and what type | no chest pain |
+            | Resting blood pressure | systolic pressure at rest (top number) | 90-120 mm Hg |
+            | Cholesterol | total cholesterol in the blood | under 200 mg/dL |
+            | Fasting blood sugar above 120 | whether fasting glucose is over 120 mg/dL | fasting under 100 mg/dL |
+            | Resting ECG | electrical activity of the heart at rest | Normal |
+            | Max heart rate achieved | highest heart rate during exercise testing | about 220 minus age |
+            | Exercise chest pain | chest pain triggered by exercise | No |
+            | ST depression (oldpeak) | ECG change during exercise | 0-1.0 |
+            | ST segment slope | shape of the ECG line after exercise | upsloping is most common |
+            | Major vessels (fluoroscopy) | number of vessels seen on imaging | 0 vessels |
+            | Thalassemia type | imaging marker related to blood flow patterns | Normal |
+            """
+        )
 
     # Show validation warnings container
     warnings_container = st.container()
@@ -705,52 +756,71 @@ def _render_heart_self_assessment() -> None:
         left, right = st.columns(2)
 
         with left:
-            age = st.number_input("How old are you?", min_value=18, max_value=100, value=50, step=1, help="Age in years.")
-            sex_label = st.selectbox("What is your biological sex?", ["Female", "Male"], help="The model uses this as a coded input.")
+            age = st.number_input(
+                "How old are you?",
+                min_value=18,
+                max_value=100,
+                value=50,
+                step=1,
+                help="Age in years. No single normal range.",
+            )
+            st.caption("Normal: age varies (no single normal range).")
+            sex_label = st.selectbox(
+                "What is your biological sex?",
+                ["Female", "Male"],
+                help="The model uses this as a coded input.",
+            )
             chest_pain_label = st.selectbox(
                 "Do you experience chest pain? If yes, what type?",
                 ["No pain", "Typical angina", "Atypical angina", "Non-anginal", "Asymptomatic"],
-                help="Chest pain is discomfort or pressure in the chest.",
+                help="Chest pain is discomfort or pressure in the chest. Normal: no chest pain.",
             )
+            st.caption("Normal: no chest pain.")
             trestbps = st.number_input(
                 "What is your resting blood pressure? (mm Hg)",
                 min_value=80,
                 max_value=200,
                 value=120,
                 step=1,
-                help="This is the blood pressure measured when you are at rest.",
+                help="Resting systolic blood pressure. Normal: 90-120 mm Hg.",
             )
+            st.caption("Normal systolic: 90-120 mm Hg.")
             chol = st.number_input(
                 "What is your cholesterol level? (mg/dL)",
                 min_value=100,
                 max_value=600,
                 value=200,
                 step=1,
-                help="Cholesterol is a fat-like substance in your blood.",
+                help="Cholesterol is a fat-like substance in your blood. Normal: under 200 mg/dL.",
             )
+            st.caption("Normal total cholesterol: under 200 mg/dL.")
             fbs_label = st.selectbox(
                 "Is your fasting blood sugar above 120 mg/dL?",
                 ["No", "Yes"],
-                help="This checks whether your blood sugar is above the normal fasting threshold.",
+                help="This checks whether your blood sugar is above the normal fasting threshold. Normal fasting: under 100 mg/dL.",
             )
+            st.caption("Normal fasting: under 100 mg/dL.")
             restecg_label = st.selectbox(
                 "What was your resting ECG result?",
                 ["Normal", "ST-T wave abnormality", "Left ventricular hypertrophy"],
-                help="An ECG records the heart's electrical activity.",
+                help="An ECG records the heart's electrical activity. Normal: Normal.",
             )
+            st.caption("Normal: Normal.")
             thalach = st.number_input(
                 "What is your maximum heart rate achieved?",
                 min_value=60,
                 max_value=220,
                 value=150,
                 step=1,
-                help="This is the fastest your heart rate reached during exercise testing.",
+                help="Fastest heart rate during exercise testing. Typical max about 220 minus age.",
             )
+            st.caption("Typical max: about 220 minus age.")
             exang_label = st.selectbox(
                 "Do you experience chest pain during exercise?",
                 ["No", "Yes"],
-                help="Exercise-induced chest pain can be a sign of reduced blood flow to the heart.",
+                help="Exercise-induced chest pain can be a sign of reduced blood flow to the heart. Normal: No.",
             )
+            st.caption("Normal: No.")
 
         with right:
             oldpeak = st.number_input(
@@ -759,24 +829,28 @@ def _render_heart_self_assessment() -> None:
                 max_value=6.0,
                 value=1.0,
                 step=0.1,
-                help="Ask your cardiologist for this value from your ECG report.",
+                help="Ask your cardiologist for this value from your ECG report. Normal: 0-1.0.",
             )
-            st.info("Oldpeak is the amount the ECG pattern changes during exercise. Higher values can suggest the heart is under more strain.")
+            st.caption("Normal: 0-1.0.")
+            st.info("Oldpeak is the amount the ECG pattern changes during exercise. Normal is around 0-1.0; higher values can suggest more strain.")
             slope_label = st.selectbox(
                 "Slope of peak exercise ST segment",
                 ["Upsloping", "Flat", "Downsloping"],
-                help="This describes the shape of the ECG line after exercise.",
+                help="This describes the shape of the ECG line after exercise. Normal: upsloping is most common.",
             )
+            st.caption("Normal: upsloping is most common.")
             ca = st.selectbox(
                 "Number of major vessels coloured by fluoroscopy",
                 [0, 1, 2, 3],
-                help="Fluoroscopy is an imaging test that can show blood vessels around the heart.",
+                help="Fluoroscopy is an imaging test that can show blood vessels around the heart. Normal: 0 vessels.",
             )
+            st.caption("Normal: 0 vessels.")
             thal_label = st.selectbox(
                 "Thalassemia type",
                 ["Normal", "Fixed defect", "Reversible defect"],
-                help="This is a heart-imaging marker that can suggest how blood flows through the heart muscle.",
+                help="Heart-imaging marker that can suggest how blood flows through the heart muscle. Normal: Normal.",
             )
+            st.caption("Normal: Normal.")
 
         submitted = st.form_submit_button("Check My Heart Disease Risk")
 
