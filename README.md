@@ -1,7 +1,6 @@
 # Medical Disease Risk Prediction System
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue)](#) [![Streamlit](https://img.shields.io/badge/Streamlit-app-FF4B4B?logo=streamlit&logoColor=white)](#) [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](#) [![FastAPI](https://img.shields.io/badge/FastAPI-available-009688?logo=fastapi&logoColor=white)](#) [![CI](https://github.com/harmandeep6988/Medical-Disease-Risk-Prediction-System/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/harmandeep6988/Medical-Disease-Risk-Prediction-System/actions/workflows/test.yml) [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-
+[![Python](https://img.shields.io/badge/Python-3.12-blue)](#) [![Streamlit](https://img.shields.io/badge/Streamlit-app-FF4B4B?logo=streamlit&logoColor=white)](#) [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](#) [![FastAPI](https://img.shields.io/badge/FastAPI-available-009688?logo=fastapi&logoColor=white)](#) [![CI](https://github.com/harmandeep6988/Medical-Disease-Risk-Prediction-System/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/harmandeep6988/Medical-Disease-Risk-Prediction-System/actions/workflows/test.yml)
 Predicts medical disease risk in seconds with interpretable ML and a clean, patient-friendly interface.
 Built for real-world use: explainability, anomaly checks, and production-ready APIs.
 
@@ -82,7 +81,3 @@ Built for real-world use: explainability, anomaly checks, and production-ready A
 | Explain |    | Generator |
 +---------+    +-----------+
 ```
-
-## License
-
-MIT — see [LICENSE](LICENSE).
