@@ -2,6 +2,8 @@
 
 Generated: 2026-04-28 22:38:55
 
+> **Note:** This is an early run. The heart disease model here was trained on the 297-record UCI dataset and tested on only 60 patients, so its scores (AUC 0.938 / 88.3%) are not the headline numbers. The final model uses the merged 1,517-record dataset and scores **AUC 0.911 / 83.6% accuracy**; see [PROJECT_REPORT.md](PROJECT_REPORT.md).
+
 ## What Was Run
 - Data prep: `scripts/prepare_datasets.py` (OpenML/URL fallback)
 - Training + evaluation: `scripts/train_and_evaluate.py` (grid search + ROC/AUC ranking)
