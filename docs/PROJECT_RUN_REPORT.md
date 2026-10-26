@@ -2,7 +2,7 @@
 
 Generated: 2026-04-28 22:38:55
 
-> **Note:** This is an early run. The heart disease model here was trained on the 297-record UCI dataset and tested on only 60 patients, so its scores (AUC 0.938 / 88.3%) are not the headline numbers. The final model uses the merged 1,517-record dataset and scores **AUC 0.911 / 83.6% accuracy**; see [PROJECT_REPORT.md](PROJECT_REPORT.md).
+> **Note:** This report records earlier training runs from April 2026. The models now shipped in `models/saved_models/` were trained on `data/raw/diabetes_kaggle.csv` (392 records) and `data/raw/heart_kaggle.csv` (633 records) and score **Diabetes AUC 0.871 / 75.9% accuracy** (Logistic Regression) and **Heart Disease AUC 0.909 / 85.0% accuracy** (Random Forest). See the [README](../README.md#results) for the current numbers.
 
 ## What Was Run
 - Data prep: `scripts/prepare_datasets.py` (OpenML/URL fallback)

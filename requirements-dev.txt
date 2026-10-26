@@ -1,0 +1,9 @@
+# Extra tools for training, data download, notebooks and tests.
+-r requirements.txt
+kaggle==2.2.3; python_version >= "3.11"  # supports the new KGAT_ access tokens
+kaggle==1.7.4.5; python_version < "3.11"  # needs a classic kaggle.json
+openml==0.15.1
+pytest==8.3.4
+pytest-cov==6.0.0
+httpx==0.28.1
+jupyterlab==4.3.4

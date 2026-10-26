@@ -1,5 +1,6 @@
-# Secrets
+# Secrets (Kaggle credentials live in ~/.kaggle, never in the repo)
 kaggle.json
+access_token
 .env
 
 # Python
@@ -7,12 +8,26 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .coverage
+coverage.xml
 htmlcov/
+.ipynb_checkpoints/
 
 # Virtual environments
 venv/
 .venv/
 env/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated at runtime (patient PDFs, logs, merged datasets)
+reports/generated/*.pdf
+reports/generated/*.log
+data/raw/*_merged*.csv
+data/processed/*_merged*.csv
 
 # Downloaded archives and tool caches
 *.zip

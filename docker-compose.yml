@@ -1,0 +1,34 @@
+# Dashboard:      docker compose up dashboard          -> http://localhost:8501
+# REST API:       docker compose up api                -> http://localhost:8000/docs
+# Retrain models: docker compose --profile training run --rm training
+services:
+  dashboard:
+    build: .
+    image: medical-risk-predictor
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
+
+  api:
+    image: medical-risk-predictor
+    build: .
+    ports:
+      - "8000:8000"
+    command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+    restart: unless-stopped
+
+  training:
+    build:
+      context: .
+      args:
+        INSTALL_DEV: "true"
+    image: medical-risk-predictor-dev
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ~/.kaggle:/home/mluser/.kaggle:ro
+    command: ["python", "scripts/train_and_evaluate.py"]
+    profiles: ["training"]

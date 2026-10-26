@@ -22,27 +22,17 @@ def run_step(command: list[str], name: str) -> None:
 
 
 def _check_kaggle_setup() -> None:
-    kaggle_config_dir = None
-    if "KAGGLE_CONFIG_DIR" in os.environ:
-        kaggle_config_dir = Path(os.environ["KAGGLE_CONFIG_DIR"])
-    else:
-        project_kaggle = ROOT / "kaggle" / "kaggle.json"
-        raw_kaggle = ROOT / "data" / "raw" / "kaggle" / "kaggle.json"
-        home_kaggle = Path.home() / ".kaggle" / "kaggle.json"
-        if raw_kaggle.exists():
-            kaggle_config_dir = raw_kaggle.parent
-            os.environ["KAGGLE_CONFIG_DIR"] = str(kaggle_config_dir)
-        elif project_kaggle.exists():
-            kaggle_config_dir = project_kaggle.parent
-            os.environ["KAGGLE_CONFIG_DIR"] = str(kaggle_config_dir)
-        elif home_kaggle.exists():
-            kaggle_config_dir = home_kaggle.parent
-            os.environ["KAGGLE_CONFIG_DIR"] = str(kaggle_config_dir)
+    if os.environ.get("KAGGLE_API_TOKEN") or (os.environ.get("KAGGLE_USERNAME") and os.environ.get("KAGGLE_KEY")):
+        print("Kaggle credentials found in environment variables.")
+        return
 
-    if kaggle_config_dir and (kaggle_config_dir / "kaggle.json").exists():
-        print(f"Kaggle credentials found in: {kaggle_config_dir}")
-    else:
-        print("Warning: Kaggle credentials not found. Downloads may fail.")
+    config_dir = Path(os.environ.get("KAGGLE_CONFIG_DIR", Path.home() / ".kaggle"))
+    for name in ["access_token", "kaggle.json"]:
+        if (config_dir / name).exists():
+            print(f"Kaggle credentials found: {config_dir / name}")
+            return
+
+    print("Warning: Kaggle credentials not found in ~/.kaggle. Downloads may fail.")
 
 
 def main() -> None:

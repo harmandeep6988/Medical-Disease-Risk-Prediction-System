@@ -1,6 +1,8 @@
 # Medical Disease Risk Prediction System
 ## Comprehensive Project Report
 
+> **Note:** This report records earlier training runs from April 2026. The models now shipped in `models/saved_models/` were trained on `data/raw/diabetes_kaggle.csv` (392 records) and `data/raw/heart_kaggle.csv` (633 records) and score **Diabetes AUC 0.871 / 75.9% accuracy** (Logistic Regression) and **Heart Disease AUC 0.909 / 85.0% accuracy** (Random Forest). See the [README](../README.md#results) for the current numbers.
+
 **Project Date:** April 2026  
 **Status:** Production-Ready with Kaggle Augmentation  
 **Environment:** Python 3.12.3 | venv at `/home/blaze/important/project.ml/.venv`

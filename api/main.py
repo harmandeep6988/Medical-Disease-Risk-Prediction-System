@@ -19,9 +19,12 @@ from contextlib import asynccontextmanager
 # Add src directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from data_preprocessing import replace_zero_with_nan, handle_missing_values
-from feature_engineering import build_feature_matrix
 from explainability import compute_shap_values
+from inference import (
+    fit_reference_transform,
+    transform_dataset_to_model_features,
+    transform_raw_to_model_features,
+)
 from api.schemas import (
     DiabetesPredictionRequest,
     HeartPredictionRequest,
@@ -47,7 +50,8 @@ class ModelContext:
         self.models = {}
         self.metadata = {}
         self.reference_data = {}
-        self.scalers = {}
+        self.transforms = {}
+        self.backgrounds = {}
 
     def load_models(self):
         """Load all models and metadata."""
@@ -84,6 +88,27 @@ class ModelContext:
                 df = pd.read_csv(DATA_DIR / "heart_processed.csv")
                 self.reference_data["heart"] = df
                 logger.info(f"✓ Heart reference data loaded ({len(df)} samples)")
+
+            # Fit the same scaling/encoding the dashboard uses, once at startup
+            for disease, meta in self.metadata.items():
+                ref_data = self.reference_data.get(disease)
+                if ref_data is None:
+                    continue
+                transform = fit_reference_transform(
+                    ref_data,
+                    meta["target"],
+                    meta.get("invalid_zero_columns", []),
+                    categorical_columns=meta.get("categorical_columns", []),
+                )
+                X_bg, _ = transform_dataset_to_model_features(
+                    ref_data,
+                    meta["target"],
+                    transform,
+                    meta["features"],
+                    meta.get("invalid_zero_columns", []),
+                )
+                self.transforms[disease] = transform
+                self.backgrounds[disease] = X_bg.sample(n=min(200, len(X_bg)), random_state=42)
 
             return len(self.models) > 0
 
@@ -138,46 +163,17 @@ def _transform_raw_to_model_features(
     """Transform raw patient data to engineered features matching model input."""
     try:
         meta = model_context.metadata.get(disease)
-        ref_data = model_context.reference_data.get(disease)
+        transform = model_context.transforms.get(disease)
 
-        if meta is None or ref_data is None:
+        if meta is None or transform is None:
             return None
 
-        raw_cols = meta.get("raw_columns", [])
-        cat_cols = meta.get("categorical_columns", [])
-        invalid_zero = meta.get("invalid_zero_columns", [])
-
-        # Create single-row dataframe from patient data
-        patient_df = pd.DataFrame([raw_patient])
-
-        # Ensure all required raw columns exist
-        for col in raw_cols:
-            if col not in patient_df.columns:
-                patient_df[col] = 0
-
-        patient_df = patient_df[raw_cols]
-
-        # Apply preprocessing same as dashboard
-        patient_df = replace_zero_with_nan(patient_df, invalid_zero)
-        patient_df = handle_missing_values(patient_df)
-
-        # Build reference transform from processed dataset
-        ref_trans = replace_zero_with_nan(ref_data[raw_cols].copy(), invalid_zero)
-        ref_trans = handle_missing_values(ref_trans)
-
-        # Build feature matrix
-        patient_engineered = build_feature_matrix(patient_df)
-        ref_engineered = build_feature_matrix(ref_trans)
-
-        # Get target feature order from metadata
-        target_features = meta.get("features", [])
-
-        # Reindex to match model features
-        patient_engineered = patient_engineered.reindex(
-            columns=target_features, fill_value=0
+        return transform_raw_to_model_features(
+            pd.DataFrame([raw_patient]),
+            transform,
+            meta["features"],
+            meta.get("invalid_zero_columns", []),
         )
-
-        return patient_engineered
 
     except Exception as e:
         logger.error(f"Error transforming features for {disease}: {e}")
@@ -191,34 +187,17 @@ def _get_shap_factors(
     try:
         model = model_context.models.get(disease)
         meta = model_context.metadata.get(disease)
-        ref_data = model_context.reference_data.get(disease)
+        X_bg = model_context.backgrounds.get(disease)
 
-        if model is None or meta is None or ref_data is None:
+        if model is None or meta is None or X_bg is None:
             return None
 
-        raw_cols = meta.get("raw_columns", [])
-        cat_cols = meta.get("categorical_columns", [])
-        invalid_zero = meta.get("invalid_zero_columns", [])
-        target_features = meta.get("features", [])
-
-        # Prepare background data
-        ref_trans = replace_zero_with_nan(ref_data[raw_cols].copy(), invalid_zero)
-        ref_trans = handle_missing_values(ref_trans)
-        X_bg = build_feature_matrix(ref_trans)
-        X_bg = X_bg.reindex(columns=target_features, fill_value=0)
-
-        # Sample up to 200 for SHAP efficiency
-        if len(X_bg) > 200:
-            X_bg = X_bg.sample(n=200, random_state=42)
-
-        # Compute SHAP
-        explainer, shap_values = compute_shap_values(model, X_bg, patient_engineered)
-
-        if shap_values is None:
-            return None
+        target_features = meta["features"]
+        _, explanation = compute_shap_values(model, X_bg, patient_engineered)
+        shap_values = np.asarray(explanation.values)
 
         # Handle 3D array (binary classification)
-        if len(shap_values.shape) == 3:
+        if shap_values.ndim == 3:
             shap_vals = shap_values[:, :, 1]
         else:
             shap_vals = shap_values
@@ -288,8 +267,12 @@ def _feature_to_english(feature: str, disease: str) -> str:
         "restecg": "Resting ECG",
         "thalach": "Max Heart Rate",
         "exang": "Exercise-Induced Angina",
+        "exang_1": "Exercise-Induced Angina (Yes)",
         "oldpeak": "ST Depression (Oldpeak)",
         "slope": "ST Segment Slope",
+        "slope_1": "ST Slope (Upsloping)",
+        "slope_2": "ST Slope (Flat)",
+        "slope_3": "ST Slope (Downsloping)",
         "ca": "Major Vessels",
         "thal": "Thalassemia Type",
     }

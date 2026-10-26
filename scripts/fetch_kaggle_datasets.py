@@ -223,14 +223,9 @@ def _drop_invalid_rows(df: pd.DataFrame, invalid_zero_columns: list[str]) -> pd.
 
 
 def _resolve_kaggle_config_dir() -> Path:
+    # Credentials are read from ~/.kaggle (or KAGGLE_CONFIG_DIR), never from inside the repo.
     if os.environ.get("KAGGLE_CONFIG_DIR"):
         return Path(os.environ["KAGGLE_CONFIG_DIR"])
-    project_kaggle = ROOT / "kaggle"
-    if (project_kaggle / "kaggle.json").exists():
-        return project_kaggle
-    raw_kaggle = ROOT / "data" / "raw" / "kaggle"
-    if (raw_kaggle / "kaggle.json").exists():
-        return raw_kaggle
     return Path.home() / ".kaggle"
 
 

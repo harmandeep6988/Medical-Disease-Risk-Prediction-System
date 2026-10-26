@@ -256,7 +256,7 @@ def _load_csv_sources(base_dir: Path, disease: str) -> list[pd.DataFrame]:
 
 
 def _download_kaggle_dataset(dataset_slug: str, output_dir: Path) -> list[pd.DataFrame]:
-    os.environ.setdefault("KAGGLE_CONFIG_DIR", str(KAGGLE_DIR))
+    os.environ.setdefault("KAGGLE_CONFIG_DIR", str(_resolve_kaggle_config_dir()))
 
     try:
         from kaggle.api.kaggle_api_extended import KaggleApi
@@ -274,14 +274,9 @@ def _download_kaggle_dataset(dataset_slug: str, output_dir: Path) -> list[pd.Dat
 
 
 def _resolve_kaggle_config_dir() -> Path:
+    # Credentials are read from ~/.kaggle (or KAGGLE_CONFIG_DIR), never from inside the repo.
     if os.environ.get("KAGGLE_CONFIG_DIR"):
         return Path(os.environ["KAGGLE_CONFIG_DIR"])
-    project_kaggle = ROOT / "kaggle"
-    if (project_kaggle / "kaggle.json").exists():
-        return project_kaggle
-    raw_kaggle = ROOT / "data" / "raw" / "kaggle"
-    if (raw_kaggle / "kaggle.json").exists():
-        return raw_kaggle
     return Path.home() / ".kaggle"
 
 

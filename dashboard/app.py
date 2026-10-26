@@ -9,7 +9,6 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC_DIR = ROOT / "src"
@@ -17,9 +16,8 @@ if str(SRC_DIR) not in sys.path:
     sys.path.append(str(SRC_DIR))
 
 from anomaly_detection import detect_anomalies
-from data_preprocessing import handle_missing_values, replace_zero_with_nan
 from explainability import compute_shap_values
-from feature_engineering import build_feature_matrix
+from inference import fit_reference_transform, transform_dataset_to_model_features, transform_raw_to_model_features
 from report_generator import generate_patient_report
 
 
@@ -111,112 +109,6 @@ def _load_disease_assets(disease: str):
         data = pd.read_csv(cfg["data"])
 
     return model, meta, data
-
-
-def _coerce_numeric(df: pd.DataFrame) -> pd.DataFrame:
-    out = df.copy()
-    for col in out.columns:
-        out[col] = pd.to_numeric(out[col], errors="coerce")
-    return out
-
-
-def _fit_reference_transform(
-    dataset: pd.DataFrame,
-    target_col: str,
-    zero_invalid_cols: list[str],
-    categorical_columns: list[str],
-) -> dict[str, Any]:
-    raw = dataset.drop(columns=[target_col], errors="ignore")
-    raw = _coerce_numeric(raw)
-    raw = replace_zero_with_nan(raw, zero_invalid_cols)
-    raw = handle_missing_values(raw)
-
-    raw_columns = list(raw.columns)
-    passthrough_cols = [c for c in categorical_columns if c in raw_columns]
-    scaled_cols = [c for c in raw_columns if c not in passthrough_cols]
-
-    std: StandardScaler | None = None
-    mm: MinMaxScaler | None = None
-    scaled = raw.copy()
-
-    if scaled_cols:
-        std = StandardScaler()
-        mm = MinMaxScaler()
-        scaled_std = std.fit_transform(raw[scaled_cols])
-        scaled_vals = mm.fit_transform(scaled_std)
-        scaled.loc[:, scaled_cols] = scaled_vals
-
-    engineered = build_feature_matrix(scaled, categorical_columns=passthrough_cols)
-
-    return {
-        "raw_columns": raw_columns,
-        "raw_medians": raw.median(numeric_only=True).to_dict(),
-        "std_scaler": std,
-        "mm_scaler": mm,
-        "scaled_columns": scaled_cols,
-        "categorical_columns": passthrough_cols,
-        "engineered_reference": engineered,
-        "raw_reference": raw,
-    }
-
-
-def _transform_raw_to_model_features(
-    raw_input: pd.DataFrame,
-    ref_transform: dict[str, Any],
-    feature_order: list[str],
-    zero_invalid_cols: list[str],
-) -> pd.DataFrame:
-    row = raw_input.reindex(columns=ref_transform["raw_columns"], fill_value=np.nan)
-    row = _coerce_numeric(row)
-    row = replace_zero_with_nan(row, zero_invalid_cols)
-
-    medians = ref_transform["raw_medians"]
-    for col, value in medians.items():
-        if col in row.columns:
-            row[col] = row[col].fillna(value)
-
-    row = handle_missing_values(row)
-
-    row_scaled = row.copy()
-    scaled_cols = ref_transform["scaled_columns"]
-    if scaled_cols:
-        row_std = ref_transform["std_scaler"].transform(row[scaled_cols])
-        row_scaled_vals = ref_transform["mm_scaler"].transform(row_std)
-        row_scaled.loc[:, scaled_cols] = row_scaled_vals
-
-    engineered = build_feature_matrix(row_scaled, categorical_columns=ref_transform["categorical_columns"])
-    return engineered.reindex(columns=feature_order, fill_value=0.0)
-
-
-def _transform_dataset_to_model_features(
-    dataset: pd.DataFrame,
-    target_col: str,
-    ref_transform: dict[str, Any],
-    feature_order: list[str],
-    zero_invalid_cols: list[str],
-) -> tuple[pd.DataFrame, pd.Series]:
-    raw = dataset.drop(columns=[target_col], errors="ignore")
-    raw = _coerce_numeric(raw)
-    raw = replace_zero_with_nan(raw, zero_invalid_cols)
-    raw = handle_missing_values(raw)
-
-    medians = ref_transform["raw_medians"]
-    for col, value in medians.items():
-        if col in raw.columns:
-            raw[col] = raw[col].fillna(value)
-
-    raw = raw.reindex(columns=ref_transform["raw_columns"], fill_value=0.0)
-    raw_scaled = raw.copy()
-    scaled_cols = ref_transform["scaled_columns"]
-    if scaled_cols:
-        raw_std = ref_transform["std_scaler"].transform(raw[scaled_cols])
-        raw_scaled_vals = ref_transform["mm_scaler"].transform(raw_std)
-        raw_scaled.loc[:, scaled_cols] = raw_scaled_vals
-
-    engineered = build_feature_matrix(raw_scaled, categorical_columns=ref_transform["categorical_columns"])
-    X_model = engineered.reindex(columns=feature_order, fill_value=0.0)
-    y = dataset[target_col] if target_col in dataset.columns else pd.Series(dtype=float)
-    return X_model, y
 
 
 def _build_patient_input(
@@ -483,9 +375,9 @@ def _load_assessment_context(disease: str) -> dict[str, Any] | None:
     if not meta_raw_columns:
         meta_raw_columns = [c for c in dataset.columns if c != target_col]
     meta_categorical = [c for c in meta.get("categorical_columns", []) if c in meta_raw_columns]
-    ref_transform = _fit_reference_transform(dataset, target_col, zero_invalid_cols, categorical_columns=meta_categorical)
+    ref_transform = fit_reference_transform(dataset, target_col, zero_invalid_cols, categorical_columns=meta_categorical)
 
-    X_model_all, _ = _transform_dataset_to_model_features(
+    X_model_all, _ = transform_dataset_to_model_features(
         dataset,
         target_col,
         ref_transform,
@@ -511,7 +403,7 @@ def _build_assessment_result(disease: str, raw_patient: dict[str, Any]) -> dict[
         return None
 
     patient_raw_df = pd.DataFrame([raw_patient])
-    patient_df = _transform_raw_to_model_features(
+    patient_df = transform_raw_to_model_features(
         patient_raw_df,
         context["ref_transform"],
         context["feature_order"],
@@ -917,13 +809,13 @@ if not meta_raw_columns:
     meta_raw_columns = [c for c in dataset.columns if c != target_col]
 meta_categorical = [c for c in meta.get("categorical_columns", []) if c in meta_raw_columns]
 
-ref_transform = _fit_reference_transform(dataset, target_col, zero_invalid_cols, categorical_columns=meta_categorical)
+ref_transform = fit_reference_transform(dataset, target_col, zero_invalid_cols, categorical_columns=meta_categorical)
 
 patient_raw_df = _build_patient_input(ref_transform["raw_columns"], ref_transform["raw_reference"], category_labels)
-patient_df = _transform_raw_to_model_features(patient_raw_df, ref_transform, feature_order, zero_invalid_cols)
+patient_df = transform_raw_to_model_features(patient_raw_df, ref_transform, feature_order, zero_invalid_cols)
 risk_prob = float(model.predict_proba(patient_df)[0][1])
 
-X_model_all, y_all = _transform_dataset_to_model_features(
+X_model_all, y_all = transform_dataset_to_model_features(
     dataset,
     target_col,
     ref_transform,

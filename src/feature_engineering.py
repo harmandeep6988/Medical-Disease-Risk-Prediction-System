@@ -47,8 +47,17 @@ def _create_interaction_features(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def build_feature_matrix(df: pd.DataFrame, categorical_columns: list[str] | None = None) -> pd.DataFrame:
-    """Apply deterministic feature construction and one-hot encoding."""
+def build_feature_matrix(
+    df: pd.DataFrame,
+    categorical_columns: list[str] | None = None,
+    drop_first: bool = True,
+) -> pd.DataFrame:
+    """Apply deterministic feature construction and one-hot encoding.
+
+    Use drop_first=False at inference time: with a single patient row, drop_first would drop
+    that patient's own category, zeroing every one-hot column. Reindexing to the model's
+    feature list afterwards removes the baseline columns the model never saw.
+    """
     enriched = _create_bmi_category(df)
     enriched = _create_age_group(enriched)
     enriched = _create_interaction_features(enriched)
@@ -61,7 +70,7 @@ def build_feature_matrix(df: pd.DataFrame, categorical_columns: list[str] | None
     encoded = pd.get_dummies(
         enriched,
         columns=[c for c in ["BMI_Category", "Age_Group"] if c in enriched.columns] + categorical_columns,
-        drop_first=True,
+        drop_first=drop_first,
     )
     return encoded
 

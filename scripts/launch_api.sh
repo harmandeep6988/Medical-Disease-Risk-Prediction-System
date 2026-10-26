@@ -19,7 +19,7 @@ if [ ! -f "data/processed/diabetes_processed.csv" ] || [ ! -f "data/processed/he
 fi
 
 # Get Python executable
-PYTHON=$(cat graphify-out/.graphify_python 2>/dev/null || echo "python3")
+PYTHON="${PYTHON:-python3}"
 
 # Start API
 echo "📡 API Server starting on http://localhost:8000"
