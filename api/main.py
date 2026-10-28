@@ -25,6 +25,7 @@ from inference import (
     transform_dataset_to_model_features,
     transform_raw_to_model_features,
 )
+from risk_policy import risk_band
 from api.schemas import (
     DiabetesPredictionRequest,
     HeartPredictionRequest,
@@ -326,14 +327,6 @@ async def predict_diabetes(request: DiabetesPredictionRequest):
         if shap_factors is None:
             shap_factors = []
 
-        # Determine risk category
-        if pred_proba < 0.4:
-            risk_category = "Low"
-        elif pred_proba < 0.7:
-            risk_category = "Moderate"
-        else:
-            risk_category = "High"
-
         confidence = "High" if pred_proba > 0.8 else "Moderate" if pred_proba > 0.3 else "Low"
 
         # Get model name
@@ -342,7 +335,7 @@ async def predict_diabetes(request: DiabetesPredictionRequest):
         return PredictionResponse(
             disease="Diabetes",
             risk_probability=float(pred_proba),
-            risk_category=risk_category,
+            risk_category=risk_band(float(pred_proba)),
             risk_score_percentage=float(pred_proba * 100),
             confidence=confidence,
             top_factors=shap_factors if shap_factors else [],
@@ -397,13 +390,6 @@ async def predict_heart(request: HeartPredictionRequest):
             shap_factors = []
 
         # Determine risk category
-        if pred_proba < 0.4:
-            risk_category = "Low"
-        elif pred_proba < 0.7:
-            risk_category = "Moderate"
-        else:
-            risk_category = "High"
-
         confidence = "High" if pred_proba > 0.8 else "Moderate" if pred_proba > 0.3 else "Low"
 
         # Get model name
@@ -412,7 +398,7 @@ async def predict_heart(request: HeartPredictionRequest):
         return PredictionResponse(
             disease="Heart Disease",
             risk_probability=float(pred_proba),
-            risk_category=risk_category,
+            risk_category=risk_band(float(pred_proba)),
             risk_score_percentage=float(pred_proba * 100),
             confidence=confidence,
             top_factors=shap_factors if shap_factors else [],

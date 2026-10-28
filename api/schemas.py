@@ -121,7 +121,7 @@ class PredictionResponse(BaseModel):
                         "direction": "increases risk"
                     }
                 ],
-                "model_used": "XGBoost"
+                "model_name": "LogisticRegression"
             }
         }
 

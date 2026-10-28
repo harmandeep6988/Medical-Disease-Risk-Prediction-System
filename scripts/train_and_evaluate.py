@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import sys
 from pathlib import Path
 from typing import Mapping
@@ -83,6 +84,11 @@ def run_pipeline(
     artifacts = _rename_artifacts(model_prefix, artifacts)
 
     best_model = models[best_model_name]
+    best_row = eval_summary.loc[eval_summary["model"] == best_model_name].iloc[0]
+    best_auc = float(best_row["auc_roc"])
+    best_accuracy = float(best_row["accuracy"])
+    record_count = len(pd.read_csv(dataset_path))
+    dataset_hash = hashlib.sha256(dataset_path.read_bytes()).hexdigest()
     explanation, shap_files, explainer, _ = explain_model_predictions(
         best_model,
         X_train_eng.sample(min(200, len(X_train_eng)), random_state=42),
@@ -101,6 +107,11 @@ def run_pipeline(
             "raw_columns": [c for c in source_columns if c != target_column],
             "categorical_columns": categorical_cols,
             "invalid_zero_columns": invalid_zero_cols,
+            "reference_data_path": dataset_path.relative_to(ROOT).as_posix(),
+            "dataset_sha256": dataset_hash,
+            "record_count": record_count,
+            "best_model": best_model_name,
+            "metrics": {"auc_roc": best_auc, "accuracy": best_accuracy},
         },
         out_dir / f"best_{model_prefix}_meta.joblib",
     )
@@ -115,11 +126,6 @@ def run_pipeline(
             X_test=X_test_eng,
             y_test=y_test,
         )
-
-    best_row = eval_summary.loc[eval_summary["model"] == best_model_name].iloc[0]
-    best_auc = float(best_row["auc_roc"])
-    best_accuracy = float(best_row["accuracy"])
-    record_count = len(pd.read_csv(dataset_path))
 
     print("CV Summary:")
     print(cv_summary)

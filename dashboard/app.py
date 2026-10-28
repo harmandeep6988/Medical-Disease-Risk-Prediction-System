@@ -19,6 +19,7 @@ from anomaly_detection import detect_anomalies
 from explainability import compute_shap_values
 from inference import fit_reference_transform, transform_dataset_to_model_features, transform_raw_to_model_features
 from report_generator import generate_patient_report
+from risk_policy import risk_band
 
 
 st.set_page_config(page_title="Medical Disease Risk Dashboard", layout="wide")
@@ -35,14 +36,12 @@ DISEASE_CFG = {
         "meta": MODEL_DIR / "best_diabetes_meta.joblib",
         "data": DATA_DIR / "diabetes_processed.csv",
         "target": "Outcome",
-        "zero_invalid": ["Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI"],
     },
     "Heart Disease": {
         "model": MODEL_DIR / "best_heart.joblib",
         "meta": MODEL_DIR / "best_heart_meta.joblib",
         "data": DATA_DIR / "heart_processed.csv",
         "target": "target",
-        "zero_invalid": [],
         "category_labels": {
             "sex": {0: "Female", 1: "Male"},
             "cp": {1: "Typical Angina", 2: "Atypical Angina", 3: "Non-anginal Pain", 4: "Asymptomatic"},
@@ -58,19 +57,15 @@ DISEASE_CFG = {
 
 
 def _risk_color(prob: float) -> str:
-    if prob < 0.33:
+    if prob < 0.4:
         return "#2E8B57"
-    if prob < 0.66:
+    if prob <= 0.7:
         return "#F0AD4E"
     return "#D9534F"
 
 
 def _risk_label(prob: float) -> str:
-    if prob < 0.33:
-        return "Low"
-    if prob < 0.66:
-        return "Medium"
-    return "High"
+    return risk_band(prob)
 
 
 def _gauge(prob: float) -> go.Figure:
@@ -85,9 +80,9 @@ def _gauge(prob: float) -> go.Figure:
                 "axis": {"range": [0, 100]},
                 "bar": {"color": color},
                 "steps": [
-                    {"range": [0, 33], "color": "rgba(46,139,87,0.2)"},
-                    {"range": [33, 66], "color": "rgba(240,173,78,0.2)"},
-                    {"range": [66, 100], "color": "rgba(217,83,79,0.2)"},
+                    {"range": [0, 40], "color": "rgba(46,139,87,0.2)"},
+                    {"range": [40, 70], "color": "rgba(240,173,78,0.2)"},
+                    {"range": [70, 100], "color": "rgba(217,83,79,0.2)"},
                 ],
             },
         )
@@ -105,7 +100,12 @@ def _load_disease_assets(disease: str):
     meta = joblib.load(cfg["meta"])
 
     data = None
-    if cfg["data"].exists():
+    reference_path = meta.get("reference_data_path")
+    if reference_path:
+        candidate = ROOT / reference_path if not Path(reference_path).is_absolute() else Path(reference_path)
+        if candidate.exists():
+            data = pd.read_csv(candidate)
+    if data is None and cfg["data"].exists():
         data = pd.read_csv(cfg["data"])
 
     return model, meta, data
@@ -187,11 +187,7 @@ def _list_comparison_models() -> dict[str, object]:
 
 
 def _assessment_risk_band(prob: float) -> str:
-    if prob < 0.4:
-        return "Low"
-    if prob <= 0.7:
-        return "Moderate"
-    return "High"
+    return risk_band(prob)
 
 
 def _show_assessment_help() -> None:
@@ -370,7 +366,7 @@ def _load_assessment_context(disease: str) -> dict[str, Any] | None:
         return None
 
     target_col = DISEASE_CFG[disease]["target"]
-    zero_invalid_cols = DISEASE_CFG[disease]["zero_invalid"]
+    zero_invalid_cols = list(meta.get("invalid_zero_columns", []))
     meta_raw_columns = list(meta.get("raw_columns", []))
     if not meta_raw_columns:
         meta_raw_columns = [c for c in dataset.columns if c != target_col]
@@ -664,7 +660,7 @@ def _render_heart_self_assessment() -> None:
             )
             chest_pain_label = st.selectbox(
                 "Do you experience chest pain? If yes, what type?",
-                ["No pain", "Typical angina", "Atypical angina", "Non-anginal", "Asymptomatic"],
+                ["Typical angina", "Atypical angina", "Non-anginal", "Asymptomatic"],
                 help="Chest pain is discomfort or pressure in the chest. Normal: no chest pain.",
             )
             st.caption("Normal: no chest pain.")
@@ -762,7 +758,7 @@ def _render_heart_self_assessment() -> None:
         raw_patient = {
             "age": float(age),
             "sex": 0 if sex_label == "Female" else 1,
-            "cp": {"No pain": 0, "Typical angina": 1, "Atypical angina": 2, "Non-anginal": 3, "Asymptomatic": 4}[chest_pain_label],
+            "cp": {"Typical angina": 1, "Atypical angina": 2, "Non-anginal": 3, "Asymptomatic": 4}[chest_pain_label],
             "trestbps": float(trestbps),
             "chol": float(chol),
             "fbs": 1 if fbs_label == "Yes" else 0,
@@ -802,7 +798,7 @@ if dataset is None:
     st.stop()
 
 target_col = DISEASE_CFG[disease]["target"]
-zero_invalid_cols = DISEASE_CFG[disease]["zero_invalid"]
+zero_invalid_cols = list(meta.get("invalid_zero_columns", []))
 category_labels = DISEASE_CFG[disease].get("category_labels", {})
 meta_raw_columns = list(meta.get("raw_columns", []))
 if not meta_raw_columns:
@@ -837,8 +833,8 @@ with pred_tab:
     label = _risk_label(risk_prob)
     if label == "Low":
         st.markdown("### Risk Level: :green[Low]")
-    elif label == "Medium":
-        st.markdown("### Risk Level: :orange[Medium]")
+    elif label == "Moderate":
+        st.markdown("### Risk Level: :orange[Moderate]")
     else:
         st.markdown("### Risk Level: :red[High]")
 

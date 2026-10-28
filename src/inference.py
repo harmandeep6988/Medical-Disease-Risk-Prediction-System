@@ -41,6 +41,8 @@ def fit_reference_transform(
     std: StandardScaler | None = None
     mm: MinMaxScaler | None = None
     scaled = raw.copy()
+    if scaled_cols := [c for c in raw.columns if c not in passthrough_cols]:
+        scaled[scaled_cols] = scaled[scaled_cols].astype(float)
 
     if scaled_cols:
         std = StandardScaler()
@@ -80,8 +82,10 @@ def transform_raw_to_model_features(
 
     row = handle_missing_values(row)
 
-    row_scaled = row.copy()
     scaled_cols = ref_transform["scaled_columns"]
+    row_scaled = row.copy()
+    if scaled_cols:
+        row_scaled[scaled_cols] = row_scaled[scaled_cols].astype(float)
     if scaled_cols:
         row_std = ref_transform["std_scaler"].transform(row[scaled_cols])
         row_scaled_vals = ref_transform["mm_scaler"].transform(row_std)
@@ -109,8 +113,10 @@ def transform_dataset_to_model_features(
             raw[col] = raw[col].fillna(value)
 
     raw = raw.reindex(columns=ref_transform["raw_columns"], fill_value=0.0)
-    raw_scaled = raw.copy()
     scaled_cols = ref_transform["scaled_columns"]
+    raw_scaled = raw.copy()
+    if scaled_cols:
+        raw_scaled[scaled_cols] = raw_scaled[scaled_cols].astype(float)
     if scaled_cols:
         raw_std = ref_transform["std_scaler"].transform(raw[scaled_cols])
         raw_scaled_vals = ref_transform["mm_scaler"].transform(raw_std)

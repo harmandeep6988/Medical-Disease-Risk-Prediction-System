@@ -110,6 +110,5 @@ Generated: 2026-04-28 22:38:55
 - Sample PDF report: `reports/generated/heart_patient_report_20260428_223859.pdf`
 
 ## Notes / Gaps
-- This repo currently runs **Diabetes** + **Heart Disease**. Liver disease + FastAPI endpoints are not present in the codebase yet.
+- This repo currently runs **Diabetes** + **Heart Disease**. Liver disease is not present; FastAPI endpoints are implemented in `api/main.py`.
 - Plot filenames in the training script are generic (risk of overwrite). This script renames per-disease artifacts to preserve both.
-

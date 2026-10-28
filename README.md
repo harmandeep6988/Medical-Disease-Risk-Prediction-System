@@ -22,7 +22,7 @@ Four model types (Logistic Regression, Random Forest, Gradient Boosting, XGBoost
 
 ## Features
 
-- **Risk prediction** for diabetes and heart disease, with Low / Medium / High risk bands
+- **Risk prediction** for diabetes and heart disease, with Low / Moderate / High risk bands (below 40%, 40-70%, above 70%)
 - **Explainability:** SHAP shows which measurements pushed each prediction up or down
 - **Patient self-assessment** forms in plain language, with a downloadable PDF report
 - **Anomaly detection** (IsolationForest) to flag unusual patient profiles
@@ -109,7 +109,7 @@ pip install -r requirements-dev.txt
 python scripts/train_and_evaluate.py
 ```
 
-This trains on `data/raw/diabetes_kaggle.csv` and `data/raw/heart_kaggle.csv` and overwrites the models in `models/saved_models/`. Charts are written to `reports/generated/`.
+This trains on `data/raw/diabetes_kaggle.csv` and `data/raw/heart_kaggle.csv` and overwrites the models in `models/saved_models/`. Model metadata records the reference dataset path, row count, SHA-256 hash, selected model, and evaluation metrics. Charts are written to `reports/generated/`.
 
 To download fresh data from Kaggle, create an API token at [kaggle.com/settings](https://www.kaggle.com/settings) → **API** → **Create New Token**, and save it to `~/.kaggle/` (on Windows: `C:\Users\<you>\.kaggle\`). Never put the token inside this repo. New-style tokens (starting with `KGAT_`) need Python 3.11 or newer. Then run:
 

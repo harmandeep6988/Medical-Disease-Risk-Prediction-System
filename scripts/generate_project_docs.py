@@ -402,7 +402,7 @@ def write_workflow_doc(out_path: Path) -> None:
 
     lines.append("## Upgrade Checklist (Recommended)")
     lines.append("- **Add Liver Disease module**: dataset, preprocessing config, model training/eval, Streamlit tab")
-    lines.append("- **Add FastAPI service** (currently missing): `api/` package, Pydantic schemas, `/predict/{disease}` endpoints")
+    lines.append("- **FastAPI service**: implemented in `api/`, with Pydantic schemas and `/predict/{disease}` endpoints")
     lines.append("- **Prevent artifact overwrites**: prefix plot/model filenames per disease in training scripts")
     lines.append("- **Calibration & thresholds**: reliability curves + threshold selection for clinical use")
     lines.append("- **Data validation**: schema checks, value ranges, and missingness alerts")

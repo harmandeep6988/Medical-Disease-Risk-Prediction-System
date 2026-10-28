@@ -40,10 +40,9 @@ This document describes the end-to-end workflow, which modules implement each st
 
 ## Upgrade Checklist (Recommended)
 - **Add Liver Disease module**: dataset, preprocessing config, model training/eval, Streamlit tab
-- **Add FastAPI service** (currently missing): `api/` package, Pydantic schemas, `/predict/{disease}` endpoints
+- **FastAPI service**: implemented in `api/`, with Pydantic schemas and `/predict/{disease}` endpoints
 - **Prevent artifact overwrites**: prefix plot/model filenames per disease in training scripts
-- **Calibration & thresholds**: reliability curves + threshold selection for clinical use
+- **Calibration & thresholds**: calibrate probabilities and validate the current 40%/70% display thresholds before any clinical use
 - **Data validation**: schema checks, value ranges, and missingness alerts
 - **Model registry/versioning**: track dataset hash + params + metrics per model build
 - **Monitoring**: drift detection + periodic retraining triggers
-

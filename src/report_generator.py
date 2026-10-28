@@ -7,18 +7,11 @@ from typing import Any
 import numpy as np
 import pandas as pd
 from fpdf import FPDF
+from risk_policy import risk_band
 
 
 REPORT_DIR = Path(__file__).resolve().parents[1] / "reports" / "generated"
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def _risk_band(probability: float) -> str:
-    if probability < 0.33:
-        return "Low"
-    if probability < 0.66:
-        return "Medium"
-    return "High"
 
 
 def _next_steps(risk_band: str) -> list[str]:
@@ -27,7 +20,7 @@ def _next_steps(risk_band: str) -> list[str]:
             "Maintain current lifestyle and annual health screening.",
             "Keep balanced diet and regular physical activity.",
         ]
-    if risk_band == "Medium":
+    if risk_band == "Moderate":
         return [
             "Schedule clinician consultation within 4 weeks.",
             "Increase physical activity to at least 150 min/week.",
@@ -38,11 +31,6 @@ def _next_steps(risk_band: str) -> list[str]:
         "Begin supervised nutrition and activity intervention plan.",
         "Monitor key vitals frequently and review medications.",
     ]
-
-
-def _estimate_savings(probability: float, baseline_cost: float = 5000.0) -> float:
-    # Simple heuristic for communication purposes.
-    return baseline_cost * min(max(probability, 0.0), 1.0) * 0.4
 
 
 def generate_patient_report(
@@ -64,8 +52,7 @@ def generate_patient_report(
     top_idx = np.argsort(np.abs(values))[::-1][:3]
     top_features = [(feature_names[i], float(values[i])) for i in top_idx]
 
-    risk_band = _risk_band(risk_probability)
-    est_savings = _estimate_savings(risk_probability)
+    band = risk_band(risk_probability)
 
     pdf = FPDF()
     pdf.set_left_margin(15)
@@ -96,7 +83,9 @@ def generate_patient_report(
     pdf.cell(0, 8, "Risk Summary", ln=True)
     pdf.set_font("Arial", "", 11)
     pdf.cell(0, 7, f"Predicted Class: {pred_class}", ln=True)
-    pdf.cell(0, 7, f"Risk Probability: {risk_probability * 100:.2f}% ({risk_band})", ln=True)
+    pdf.cell(0, 7, f"Risk Probability: {risk_probability * 100:.2f}% ({band})", ln=True)
+    pdf.set_x(pdf.l_margin)
+    pdf.multi_cell(line_w, 7, "Educational estimate only; this report is not a diagnosis or a substitute for clinical advice.")
 
     pdf.ln(2)
     pdf.set_font("Arial", "B", 13)
@@ -112,16 +101,9 @@ def generate_patient_report(
     pdf.set_font("Arial", "B", 13)
     pdf.cell(0, 8, "Recommended Next Steps", ln=True)
     pdf.set_font("Arial", "", 11)
-    for step in _next_steps(risk_band):
+    for step in _next_steps(band):
         pdf.set_x(pdf.l_margin)
         pdf.multi_cell(line_w, 7, f"- {step}")
-
-    pdf.ln(2)
-    pdf.set_font("Arial", "B", 13)
-    pdf.cell(0, 8, "Cost-Benefit Insight", ln=True)
-    pdf.set_font("Arial", "", 11)
-    pdf.set_x(pdf.l_margin)
-    pdf.multi_cell(line_w, 7, f"Early intervention saves approx ${est_savings:,.0f} in avoidable long-term care costs.")
 
     out_path = REPORT_DIR / f"{filename_prefix}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
     pdf.output(str(out_path))

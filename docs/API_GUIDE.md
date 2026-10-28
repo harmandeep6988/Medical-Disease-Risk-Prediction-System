@@ -109,7 +109,7 @@ POST /predict/diabetes
       "direction": "increases risk"
     }
   ],
-  "model_used": "XGBoost"
+  "model_name": "LogisticRegression"
 }
 ```
 
@@ -164,7 +164,7 @@ POST /predict/heart
       "direction": "decreases risk"
     }
   ],
-  "model_used": "RandomForest"
+  "model_name": "RandomForestClassifier"
 }
 ```
 
@@ -210,7 +210,7 @@ POST /predict/heart
 | Category | Threshold | Interpretation |
 |----------|-----------|-----------------|
 | Low | < 0.4 | Risk probability below 40% |
-| Moderate | 0.4 - 0.7 | Risk probability 40-70% |
+| Moderate | 0.4 - 0.7 (inclusive) | Risk probability from 40% through 70% |
 | High | > 0.7 | Risk probability above 70% |
 
 ---
@@ -222,7 +222,7 @@ POST /predict/heart
 - **risk_score_percentage**: Risk as percentage (0-100)
 - **confidence**: Model's confidence in prediction (Low/Moderate/High)
 - **top_factors**: Top 3 SHAP-based feature influences
-- **model_used**: Name of the ML model used
+- **model_name**: Python classifier class used for the prediction
 
 ---
 

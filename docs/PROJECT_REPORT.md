@@ -15,7 +15,7 @@
 
 The **Medical Disease Risk Prediction System** is an end-to-end machine learning application that predicts the risk of **Diabetes** and **Heart Disease** from patient clinical data. The system combines:
 
-- **Data-driven ML models** trained on 768 diabetes records and 1,517 heart disease records (augmented via Kaggle)
+- **Data-driven ML models** trained on the shipped reference datasets recorded in model metadata (currently 392 diabetes records and 633 heart disease records)
 - **Explainable AI (SHAP)** to show clinicians which health factors drive risk predictions
 - **Interactive Streamlit dashboard** for real-time inference with categorical encoding safety
 - **PDF patient reporting** for clinical documentation
